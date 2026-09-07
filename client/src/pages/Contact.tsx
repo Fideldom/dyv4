@@ -1,0 +1,155 @@
+/**
+ * DYLANDE — Navy Precision / Corporate Rebuild
+ * Contacto: reduzir fricção, dar contexto e encaminhar rapidamente o pedido certo.
+ */
+import { FormEvent, useState } from "react";
+import { ArrowUpRight, Check, Mail, MapPin, Phone, Send } from "lucide-react";
+import { toast } from "sonner";
+import { siteConfig } from "@/lib/siteConfig";
+import { MotionHeroTitle } from "@/components/motion/MotionHeroTitle";
+import { Reveal } from "@/components/motion/Reveal";
+import { Magnetic } from "@/components/motion/Magnetic";
+const email = siteConfig.contact.email;
+export default function Contact() {
+  const [sent, setSent] = useState(false);
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const subject = encodeURIComponent(
+      `Contacto DYLANDE — ${f.get("service") || "novo pedido"}`,
+    );
+    const body = encodeURIComponent(
+      `Nome: ${f.get("name")}\nEmpresa: ${f.get("company")}\nEmail: ${f.get("email")}\nTelefone: ${f.get("phone")}\nServiço: ${f.get("service")}\nMensagem: ${f.get("message")}`,
+    );
+    setSent(true);
+    toast.success("Pedido preparado", {
+      description: "O seu cliente de email vai abrir para concluir o envio.",
+    });
+    window.setTimeout(() => {
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }, 350);
+  };
+  return (
+    <div className="inner-page contact-page">
+      <div className="container">
+        <div className="contact-hero">
+          <div>
+            <MotionHeroTitle
+              as="h1"
+              variant="split"
+              eyebrow="Contacto DYLANDE"
+              title="Começamos por perceber o que precisa de funcionar melhor."
+            />
+            <Reveal delay={0.2} trigger="mount">
+              <p>
+                Explique-nos o desafio. A nossa equipa devolve contexto, opções
+                e um próximo passo concreto.
+              </p>
+            </Reveal>
+          </div>
+          <div className="contact-mark">
+            DY
+            <br />
+            <b>01</b>
+          </div>
+        </div>
+      </div>
+      <section className="container contact-layout">
+        <Reveal className="contact-details">
+          <span className="eyebrow">Fale directamente</span>
+          <h2>Uma conversa clara vale mais do que uma proposta genérica.</h2>
+          <div className="contact-detail-list">
+            <a href={`mailto:${email}`}>
+              <Mail size={18} />
+              <span>
+                <small>Email</small>
+                {email}
+              </span>
+            </a>
+            <a
+              href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessages["/contacto"])}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Phone size={18} />
+              <span>
+                <small>WhatsApp</small>Falar com a equipa
+              </span>
+            </a>
+            <div>
+              <MapPin size={18} />
+              <span>
+                <small>Localização</small>
+                {siteConfig.contact.location.split(" · ")[0]}
+              </span>
+            </div>
+          </div>
+          <div className="contact-promise">
+            <Check size={16} />
+            Resposta orientada ao seu contexto
+          </div>
+        </Reveal>
+        <Reveal delay={0.15} as="div" className="contact-form-new">
+          <form onSubmit={submit}>
+            <div className="form-line">
+              <label>
+                Nome completo
+                <input
+                  required
+                  name="name"
+                  placeholder="Como devemos chamar-lhe?"
+                />
+              </label>
+              <label>
+                Empresa
+                <input name="company" placeholder="Nome da empresa" />
+              </label>
+            </div>
+            <div className="form-line">
+              <label>
+                Email
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  placeholder="nome@empresa.com"
+                />
+              </label>
+              <label>
+                Telefone
+                <input name="phone" placeholder="+244 ..." />
+              </label>
+            </div>
+            <label>
+              O que precisa de resolver?
+              <select name="service" defaultValue="">
+                <option value="" disabled>
+                  Seleccione uma área
+                </option>
+                <option>Faturação e Stock</option>
+                <option>Restauração / Hotelaria</option>
+                <option>Lavandaria / Barbearia / Oficina</option>
+                <option>Desenvolvimento de software</option>
+                <option>Suporte e infraestrutura</option>
+              </select>
+            </label>
+            <label>
+              Mensagem
+              <textarea
+                required
+                name="message"
+                rows={6}
+                placeholder="Dê-nos o contexto essencial."
+              ></textarea>
+            </label>
+            <Magnetic>
+              <button type="submit" className="button button-primary">
+                {sent ? "Pedido preparado" : "Enviar pedido"} <Send size={15} />
+              </button>
+            </Magnetic>
+          </form>
+        </Reveal>
+      </section>
+    </div>
+  );
+}
