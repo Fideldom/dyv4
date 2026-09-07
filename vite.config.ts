@@ -13,5 +13,12 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
   },
-  server: { port: 3000, host: true },
+  server: { 
+    port: 3000, 
+    host: true,
+    allowedHosts: [".onrender.com", true]
+  },
+  preview: {
+    allowedHosts: [".onrender.com", true]
+  }
 });
