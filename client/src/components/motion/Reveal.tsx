@@ -1,9 +1,8 @@
-/**
- * DYLANDE MOTION SYSTEM — Reveal
- * Entrada genérica para parágrafos, cards e blocos secundários.
- * Não é a assinatura tipográfica (isso é o MotionHeroTitle) — é o motion
- * de secção: discreto, reutilizável, sempre com uma função (orientar o olhar
- * pela hierarquia da página).
+/* DYLANDE MOTION SYSTEM — Reveal
+  Entrada genérica para parágrafos, cards e blocos secundários.
+  Não é a assinatura tipográfica (isso é o MotionHeroTitle) — é o motion
+  de secção: discreto, reutilizável, sempre com uma função (orientar o olhar
+  pela hierarquia da página).
  */
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";

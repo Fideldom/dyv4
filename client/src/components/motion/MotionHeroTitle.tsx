@@ -1,16 +1,16 @@
-/**
- * DYLANDE MOTION TYPOGRAPHY SYSTEM
- * Componente central de tipografia animada. Cada página usa uma variante
- * diferente para que a assinatura visual da DYLANDE seja o próprio texto,
- * nunca decoração gratuita. Todas as variantes:
- *  - renderizam texto real e semântico (h1/h2, sem canvas);
- *  - respeitam prefers-reduced-motion (fallback instantâneo);
- *  - animam apenas transform / opacity / filter / clip-path (performance).
+/* DYLANDE MOTION TYPOGRAPHY SYSTEM
+  Componente central de tipografia animada. Cada página usa uma variante
+  diferente para que a assinatura visual da DYLANDE seja o próprio texto,
+  nunca decoração gratuita. Todas as variantes:
+   - renderizam texto real e semântico (h1/h2, sem canvas);
+   - respeitam prefers-reduced-motion (fallback instantâneo);
+   - animam apenas transform / opacity / filter / clip-path (performance).
  */
 import { motion, useReducedMotion } from "framer-motion";
 import { splitLetters, splitWords, driftOffset } from "./textSplit";
 
-export type MotionTitleVariant = "cinematic" | "mask" | "fill" | "drift" | "blur" | "outline" | "split";
+export type MotionTitleVariant =
+  "cinematic" | "mask" | "fill" | "drift" | "blur" | "outline" | "split";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 
@@ -54,7 +54,12 @@ export function MotionHeroTitle({
     <>
       {eyebrowNode}
       <Tag className={className}>
-        <TitleBody title={title} accent={accent} variant={variant} reduceMotion={!!reduceMotion} />
+        <TitleBody
+          title={title}
+          accent={accent}
+          variant={variant}
+          reduceMotion={!!reduceMotion}
+        />
       </Tag>
     </>
   );
@@ -74,7 +79,12 @@ function TitleBody({
   if (reduceMotion) {
     return (
       <>
-        {title} {accent && <em style={{ color: "var(--mint)", fontStyle: "normal" }}>{accent}</em>}
+        {title}{" "}
+        {accent && (
+          <em style={{ color: "var(--mint)", fontStyle: "normal" }}>
+            {accent}
+          </em>
+        )}
       </>
     );
   }
@@ -99,10 +109,8 @@ function TitleBody({
   }
 }
 
-/* ---------------------------------------------------------------------- */
 /* CINEMATIC — Home: palavras nascem com blur + escala + leve subida,     */
 /* o destaque final entra com um pequeno "pop" de mola — é a assinatura   */
-/* ---------------------------------------------------------------------- */
 function Cinematic({ title, accent }: { title: string; accent?: string }) {
   const words = splitWords(title);
   return (
@@ -119,9 +127,9 @@ function Cinematic({ title, accent }: { title: string; accent?: string }) {
             hidden: { opacity: 0, y: 32, scale: 0.94, filter: "blur(12px)" },
             visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
           }}
-          transition={{ duration: 0.8, ease: EASE }}
+          transition={{ duration: 0.5, ease: EASE }}
         >
-          {word}
+          {word}<span style={{marginLeft: "12px"}}></span>
         </motion.span>
       ))}{" "}
       {accent && (
@@ -131,10 +139,20 @@ function Cinematic({ title, accent }: { title: string; accent?: string }) {
               key={`accent-${word}-${i}`}
               style={{ display: "inline-block" }}
               variants={{
-                hidden: { opacity: 0, y: 36, scale: 0.86, filter: "blur(14px)" },
+                hidden: {
+                  opacity: 0,
+                  y: 36,
+                  scale: 0.86,
+                  filter: "blur(14px)",
+                },
                 visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
               }}
-              transition={{ type: "spring", stiffness: 130, damping: 13, mass: 0.7 }}
+              transition={{
+                type: "spring",
+                stiffness: 130,
+                damping: 13,
+                mass: 0.7,
+              }}
             >
               {word}{" "}
             </motion.span>
@@ -145,10 +163,8 @@ function Cinematic({ title, accent }: { title: string; accent?: string }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
 /* DRIFT — Soluções: letras nascem afastadas, rodadas e reduzidas,        */
 /* depois convergem em posição, ângulo e escala — sensação de "montagem" */
-/* ---------------------------------------------------------------------- */
 function Drift({ title, accent }: { title: string; accent?: string }) {
   const full = accent ? `${title} ${accent}` : title;
   const letters = splitLetters(full);
@@ -179,10 +195,8 @@ function Drift({ title, accent }: { title: string; accent?: string }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
 /* BLUR — Empresa: desfocado, maior e ligeiramente abaixo, entra em foco  */
 /* com uma leve subida — sensação de "assentar" no lugar                 */
-/* ---------------------------------------------------------------------- */
 function Blur({ title }: { title: string }) {
   return (
     <motion.span
@@ -196,11 +210,9 @@ function Blur({ title }: { title: string }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
 /* MASK — Serviços: máscara horizontal atravessa o texto com um leve      */
 /* desalinhamento (skew) que se corrige durante a revelação — wipe        */
 /* cinematográfico, não um simples corte reto                            */
-/* ---------------------------------------------------------------------- */
 function Mask({ title }: { title: string }) {
   return (
     <motion.span
@@ -214,20 +226,21 @@ function Mask({ title }: { title: string }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
 /* FILL — Software: energia preenche a palavra e, perto do fim, uma       */
 /* aresta luminosa em menta atravessa o texto — o "acender" da energia    */
-/* ---------------------------------------------------------------------- */
 function FillReveal({ title }: { title: string }) {
   return (
     <span style={{ position: "relative", display: "inline-block" }}>
-      <span aria-hidden style={{ opacity: 0.12 }}>{title}</span>
+      <span aria-hidden style={{ opacity: 0.12 }}>
+        {title}
+      </span>
       <motion.span
         style={{
           position: "absolute",
           inset: 0,
           display: "inline-block",
-          backgroundImage: "linear-gradient(90deg, var(--ink) 0%, var(--ink) 80%, var(--mint) 92%, var(--ink) 100%)",
+          backgroundImage:
+            "linear-gradient(90deg, var(--ink) 0%, var(--ink) 80%, var(--mint) 92%, var(--ink) 100%)",
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
@@ -242,10 +255,8 @@ function FillReveal({ title }: { title: string }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
 /* OUTLINE — Certificações: contorno visível, preenchimento sólido a      */
 /* seguir e um micro "assentar" de escala no instante em que fecha        */
-/* ---------------------------------------------------------------------- */
 function OutlineReveal({ title }: { title: string }) {
   return (
     <span style={{ position: "relative", display: "inline-block" }}>
@@ -270,10 +281,8 @@ function OutlineReveal({ title }: { title: string }) {
   );
 }
 
-/* ---------------------------------------------------------------------- */
 /* SPLIT — Contactos: dois blocos convergem com física de mola (leve      */
 /* rotação que se anula) — um "encaixe" com mais carácter que um fade     */
-/* ---------------------------------------------------------------------- */
 function SplitReassembly({ title }: { title: string }) {
   const words = splitWords(title);
   const mid = Math.ceil(words.length / 2);
@@ -288,14 +297,20 @@ function SplitReassembly({ title }: { title: string }) {
     >
       <motion.span
         style={{ display: "inline-block" }}
-        variants={{ hidden: { opacity: 0, x: -60, rotate: -3 }, visible: { opacity: 1, x: 0, rotate: 0 } }}
+        variants={{
+          hidden: { opacity: 0, x: -60, rotate: -3 },
+          visible: { opacity: 1, x: 0, rotate: 0 },
+        }}
         transition={{ type: "spring", stiffness: 170, damping: 16, mass: 0.7 }}
       >
         {left}{" "}
       </motion.span>
       <motion.span
         style={{ display: "inline-block" }}
-        variants={{ hidden: { opacity: 0, x: 60, rotate: 3 }, visible: { opacity: 1, x: 0, rotate: 0 } }}
+        variants={{
+          hidden: { opacity: 0, x: 60, rotate: 3 },
+          visible: { opacity: 1, x: 0, rotate: 0 },
+        }}
         transition={{ type: "spring", stiffness: 170, damping: 16, mass: 0.7 }}
       >
         {right}
