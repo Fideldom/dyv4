@@ -1379,7 +1379,7 @@ button {
   color: var(--blue);
 }
 .cert-preview {
-  height: 250px;
+  height: 240px;
   display: grid;
   place-items: center;
   position: relative;
@@ -1397,7 +1397,7 @@ button {
 }
 .cert-preview span {
   position: absolute;
-  bottom: 22px;
+  bottom: 40px;
   color: var(--blue);
   font-size: 12px;
   font-weight: 600;
