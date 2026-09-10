@@ -6,24 +6,55 @@ import { Link } from "wouter";
 import { ArrowUpRight, Check, CircleDot } from "lucide-react";
 import { PageIntro } from "@/components/SiteLayout";
 import { Reveal } from "@/components/motion/Reveal";
+const m = "/media/";
 const sectors = [
   [
-    "Pequenas e médias empresas",
-    "Uma base de gestão para sair do improviso e crescer com mais visibilidade.",
+    "Gestão Integrada",
+    "Sistema completo de gestão empresarial com módulos integrados para controle total do seu negócio em uma única plataforma.",
   ],
   [
-    "Restauração e hotelaria",
-    "Turnos, produtos e atendimento alinhados para a operação não perder o ritmo.",
+    "Multi-Banco de Dados",
+    "Compatibilidade com MySQL, SQL Server e outros bancos de dados para flexibilidade total na sua infraestrutura.",
   ],
   [
-    "Serviços especializados",
-    "Agendas, ordens, clientes e entregas organizados num fluxo simples.",
+    "Acesso Multiplataforma",
+    "Solução Desktop e Web para acesso total aos seus dados de qualquer lugar, a qualquer momento e em qualquer dispositivo.",
   ],
   [
-    "Comércio e distribuição",
-    "Stock, facturação e informação comercial no mesmo lugar.",
+    "Seja um Revendedor",
+    "Torne-se nosso parceiro e fique com 100% do lucro. Modelo de negócio comissionado para crescimento mútuo.",
   ],
 ];
+
+const sectors1 = [
+  [
+    "Gestão de Vendas",
+    "Sistema completo para gerenciamento do funil de vendas.",
+    "CRM integrado e personalizável",
+    "Automação de pedidos e faturação",
+    "Relatórios de desempenho em tempo real"
+  ],
+  [
+    "Controle de Estoque",
+    "Controle preciso do seu inventário com alertas automáticos.",
+    "Alertas automáticos de reposição",
+    "Gestão de múltiplos armazéns"
+  ],
+  [
+    "Gestão Financeira",
+    "Solução completa para controle financeiro, fluxo de caixa.",
+    "Conciliação bancária automática",
+    "Relatórios fiscais e contábeis"
+  ],
+  [
+    "Recursos Humanos",
+    "Plataforma integrada para gestão de pessoas.",
+    "Gestão de recrutamento e seleção",
+    "Controle de horários e pagamentos",
+    "  "
+  ],
+];
+
 export default function Solutions() {
   return (
     <div className="inner-page">
@@ -31,8 +62,8 @@ export default function Solutions() {
         <PageIntro
           variant="drift"
           kicker="Soluções por sector"
-          title="Tecnologia que fala a língua do seu negócio."
-          text="Escolha uma realidade próxima da sua. A partir daí, construímos a combinação certa entre software, serviço e suporte."
+          title="Soluções Completas para o Seu Negócio."
+          text="Software de gestão empresarial desenvolvido para otimizar suas operações e maximizar resultados."
         />
       </div>
       <Reveal as="section" className="container sector-grid" amount={0.1}>
@@ -48,6 +79,52 @@ export default function Solutions() {
           </Link>
         ))}
       </Reveal>
+
+      <div className="container solution-callout">
+        <Reveal>
+          <span className="eyebrow">O próximo passo é concreto</span>
+          <h2>Kit Completo de Faturação - Apartir de 295.000 kz!</h2>
+          <p>
+            Inclui computador, Impressora Térmica, Leitor de Código de Barras,
+            Gaveta Electrónica e o Software já pronto a usar!
+          </p><br></br>
+          <button className="button button-primary">
+            <a
+            href="https://wa.me/244923705159?text=Olá%2C%20gostaria%20de%20solicitar%20o%20kit%20de%20faturação%C3%A7%C3%A3o"
+            className="cta-button aos-init aos-animate"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            Solicitar
+            <i className="fas fa-arrow-right"></i>
+          </a>
+          </button>
+          
+        </Reveal>
+        <Reveal>
+          <img src={`${m}kitspc.jpeg`} alt="orcamento" />
+        </Reveal>
+      </div><br></br>
+
+        <Reveal as="section" className="container sector-grid" amount={0.1}>
+        {sectors1.map(([title, text, list1, list2, list3], i) => (
+          <Link href="/contacto" className="sector-card" key={title}>
+            <span>0{i + 5}</span>
+            <CircleDot size={18} />
+            <h2>{title}</h2>
+            <p>{text}</p>
+            <ul className="check-list">
+              <li><Check size={16} /> {list1}</li>
+              <li><Check size={16} /> {list2}</li>
+              <li><Check size={16} /> {list3}</li>
+            </ul>
+            <b>
+              Explorar possibilidade <ArrowUpRight size={15} />
+            </b>
+          </Link>
+        ))}
+      </Reveal>
+
       <section className="container solution-callout">
         <Reveal>
           <span className="eyebrow">A medida certa</span>
@@ -73,7 +150,8 @@ export default function Solutions() {
             </li>
           </ul>
         </Reveal>
-      </section><br></br>
+      </section>
+      <br></br>
     </div>
   );
 }

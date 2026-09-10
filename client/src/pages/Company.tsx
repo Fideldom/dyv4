@@ -90,7 +90,6 @@ const team = [
     "Desenvolvedor especializado com foco em gestão de projetos e soluções tecnológicas inovadoras.",
   ],
   ["Esmael Andrade", "Desenvolvedor Backend", "Suporte Técnico"],
-  ["Nelson", "Desenvolvedor Desktop", "Suporte Técnico"],
   ["Edson António", "Desenvolvedor Web", ""],
   ["Fidel Maluto", "Desenvolvedor Web/APP", ""],
 ];

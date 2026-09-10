@@ -61,8 +61,8 @@ export default function Software() {
         <PageIntro
           variant="fill"
           kicker="Software DYLANDE"
-          title="Sistemas que conhecem o ritmo da operação."
-          text="Software online e offline para negócios que precisam de trabalhar com menos improviso e mais contexto."
+          title="Soluções Inteligentes para Seu Negócio."
+          text="Módulos especializados para cada segmento. Transforme sua gestão com tecnologia inovadora e resultados comprovados."
         />
       </div>
       <section className="container product-feature">

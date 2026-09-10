@@ -121,10 +121,10 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             <span>{siteConfig.contact.location.split(" · ")[0]}</span>
           </div>
         </div>
-        <div className="container footer-bottom">
+        {/* <div className="container footer-bottom">
           <span>© 2026 DYLANDE — Prestação de Serviços Comércio Geral</span>
           <span>Feito para operações que não podem parar.</span>
-        </div>
+        </div> */}
       </footer>
       <WhatsAppButton />
     </div>

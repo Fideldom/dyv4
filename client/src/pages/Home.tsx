@@ -406,13 +406,17 @@ export default function Home() {
         <div className="container final-cta-inner">
           <Reveal>
             <span className="eyebrow">O próximo passo é concreto</span>
-            <h2>Mostre-nos onde a operação pode ser melhor.</h2>
-          </Reveal>
-          <Magnetic>
+            <h2>faça crescer o seu negócio connosco</h2>
+            <Magnetic>
             <Link href="/contacto" className="button button-primary">
               Agendar conversa <ArrowUpRight size={16} />
             </Link>
           </Magnetic>
+          </Reveal>
+          <Reveal>
+            <img src={`${media}orcamento.png`} alt="orcamento" />
+          </Reveal>
+          
         </div>
       </section><br></br>
     </div>
