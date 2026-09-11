@@ -1,7 +1,6 @@
-/*
- * DYLANDE — Identidade real da marca (azul + teal, extraída do logótipo e materiais oficiais)
- * Base clara, cartões brancos com sombra suave, gradiente azul->teal nos CTAs (como nos materiais reais).
- * Tipografia: Outfit (títulos) + Inter (texto) — limpo, credível, "empresa de software".
+/* DYLANDE — Identidade real da marca (azul + teal, extraída do logótipo e materiais oficiais)
+  Base clara, cartões brancos com sombra suave, gradiente azul->teal nos CTAs (como nos materiais reais).
+  Tipografia: Outfit (títulos) + Inter (texto) — limpo, credível, "empresa de software".
  */
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -339,15 +338,65 @@ button {
 .hero-chip svg {
   color: var(--mint);
 }
-.hero-new-inner{width:100%;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:56px;padding:0 0 90px}
-.hero-new-side{display:flex;flex-direction:column;gap:18px}
-.hero-side-media{width:100%;height:460px;border-radius:28px;background-position:center;background-size:cover;box-shadow:0 40px 80px rgba(3,10,26,.5);animation:hero-side-in .7s var(--ease)}
-@keyframes hero-side-in{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
-.hero-pager{display:flex;gap:10px;justify-content:center}
-.hero-pager button{display:flex;align-items:center;gap:8px;color:#7f96b8;font-size:11px;font-weight:600}
-.hero-pager button i{display:block;width:22px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}
-.hero-pager button.active{color:#fff}
-.hero-pager button.active i{width:38px;background:var(--mint)}
+.hero-new-inner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 56px;
+  padding: 0 0 90px;
+}
+.hero-new-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.hero-side-media {
+  width: 100%;
+  height: 460px;
+  border-radius: 28px;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 40px 80px rgba(3, 10, 26, 0.5);
+  animation: hero-side-in 0.7s var(--ease);
+}
+@keyframes hero-side-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.hero-pager {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.hero-pager button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7f96b8;
+  font-size: 11px;
+  font-weight: 600;
+}
+.hero-pager button i {
+  display: block;
+  width: 22px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.hero-pager button.active {
+  color: #fff;
+}
+.hero-pager button.active i {
+  width: 38px;
+  background: var(--mint);
+}
 .hero-collage {
   position: relative;
   height: 480px;
@@ -2022,9 +2071,9 @@ button {
   }
 }
 
-/* ===================================================================
+/* 
    DYLANDE MOTION SYSTEM — scroll progress, WhatsApp global
-   =================================================================== */
+    */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -2195,14 +2244,14 @@ button {
   }
 }
 
-/* ===================================================================
+/* 
    DYLANDE — Programa de Revendedores (Home)
-   =================================================================== */
+    */
 .reseller-section {
   background: var(--background);
 }
 .reseller-hero {
-  padding: 100px 0 50px;
+  padding: 0 0 50px;
 }
 .reseller-hero h2 {
   margin: 14px 0 16px;
@@ -2329,9 +2378,9 @@ button {
   margin: 0;
 }
 
-/* ===================================================================
+/* 
    DYLANDE — Empresa: Diferenciais, Certificações, Trajetória, Equipa
-   =================================================================== */
+    */
 .company-differentials {
   padding: 36px 0 110px;
 }
@@ -2718,5 +2767,22 @@ button {
   .partners-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 22px;
+  }
+}
+
+@media (max-width: 920px) {
+  .hero-new-inner {
+    grid-template-columns: 1fr;
+  }
+  .hero-side-media {
+    height: 340px;
+  }
+}
+@media (max-width: 720px) {
+  .hero-new-side {
+    order: -1;
+  }
+  .hero-side-media {
+    height: 260px;
   }
 }

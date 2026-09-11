@@ -1,6 +1,5 @@
-/**
- * DYLANDE — Navy Precision / Corporate Rebuild
- * Soluções: linguagem de negócio, comparação rápida e caminhos de compra claros.
+/* DYLANDE — Navy Precision / Corporate Rebuild
+  Soluções: linguagem de negócio, comparação rápida e caminhos de compra claros.
  */
 import { Link } from "wouter";
 import { ArrowUpRight, Check, CircleDot } from "lucide-react";

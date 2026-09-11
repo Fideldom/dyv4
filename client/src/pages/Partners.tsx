@@ -1,15 +1,13 @@
-/**
- * DYLANDE — Página Parceiros
- * Substitui o carrossel Swiper (jQuery) do site antigo por uma faixa contínua em CSS puro,
- * sem dependências externas, acessível e respeitando prefers-reduced-motion.
+/* DYLANDE — Página Parceiros
+  Substitui o carrossel Swiper (jQuery) do site antigo por uma faixa contínua em CSS puro,
+  sem dependências externas, acessível e respeitando prefers-reduced-motion.
  */
 import { PageIntro } from "@/components/SiteLayout";
 import { Reveal } from "@/components/motion/Reveal";
 
 const m = "/media/parceiros/";
 
-/* Adicione aqui cada parceiro novo. "name" é usado apenas como alt/acessibilidade —
- * o logótipo é que aparece visualmente. */
+/* Adicione aqui cada parceiro novo. "name" é usado apenas como alt/acessibilidade — o logótipo é que aparece visualmente. */
 const partners = [
   { name: "Logiaabe", file: "logiaabe.png" },
   { name: "Logonel", file: "logonel.png" },
@@ -30,6 +28,15 @@ export default function Partners() {
           title="Parceiros que tornam esta operação possível."
           text="Trabalhamos lado a lado com parceiros tecnológicos e institucionais para entregar software, suporte e infraestrutura em que o cliente pode confiar."
         />
+
+        <a
+          className="button button-primary"
+          href="https://dylande.com"
+          target="_blank"
+          rel="noreferrer"
+        >
+          logar como parceiro
+        </a>
       </div>
 
       <section className="container section-new partners-section">
@@ -57,7 +64,8 @@ export default function Partners() {
               <img src={`${m}${p.file}`} alt="" loading="lazy" />
             </div>
           ))}
-        </div><br />
+        </div>
+        <br />
       </section>
     </div>
   );

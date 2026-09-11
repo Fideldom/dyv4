@@ -137,7 +137,7 @@ export default function Home() {
               eyebrow={slide.eyebrow}
               title="O negócio cresce quando a operação ganha"
               accent={slide.accent}
-            />
+            /><br></br>
             <Reveal delay={0.45} trigger="mount" className="hero-new-actions">
               <Magnetic>
                 <Link href="/software" className="button button-primary">

@@ -1,7 +1,7 @@
 /* DYLANDE — Navy Precision: dados editáveis separados da interface para facilitar a personalização real.
- * O número de WhatsApp e o email existem apenas aqui — nenhum outro ficheiro deve escrever estes valores
- * directamente, para evitar o número ficar espalhado e desalinhado pelo código (ver SiteLayout, Contact
- * e WhatsAppButton, que importam tudo daqui). */
+  O número de WhatsApp e o email existem apenas aqui — nenhum outro ficheiro deve escrever estes valores
+  directamente, para evitar o número ficar espalhado e desalinhado pelo código (ver SiteLayout, Contact
+  e WhatsAppButton, que importam tudo daqui). */
 export const siteConfig = {
   contact: {
     email: "geral.dylande@gmail.com",

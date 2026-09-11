@@ -1,6 +1,5 @@
-/**
- * DYLANDE — Navy Precision / Corporate Rebuild
- * Página de produto: demonstração visual, módulos sectoriais e caminho para compra.
+/* DYLANDE — Navy Precision / Corporate Rebuild
+  Página de produto: demonstração visual, módulos sectoriais e caminho para compra.
  */
 import { Link } from "wouter";
 import {
