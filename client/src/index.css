@@ -839,7 +839,7 @@ button {
 }
 .footer-main {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 70px;
   padding-bottom: 60px;
 }
@@ -887,6 +887,13 @@ button {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #7e93b3;
   font-size: 12.5px;
+}
+.icons-footer {
+  display: inline-flex;
+  margin: 4px;
+}
+.icons-footer a {
+  margin: 6px;
 }
 .page-intro {
   max-width: 820px;

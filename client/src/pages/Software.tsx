@@ -90,9 +90,10 @@ export default function Software() {
           </ul>
           <div className="product-actions">
             <Magnetic>
-              <Link href="/contacto" className="button button-primary">
-                Solicitar demonstração <ArrowRight size={16} />
-              </Link>
+              <a href="https://wa.me/244928271370?text=Olá%2C%20gostaria%20de%20solicitar%20um%20orçamento" 
+              className="button button-primary">
+                Solicitar orçamento <ArrowRight size={16} />
+              </a>
             </Magnetic>
             <a
               href={brochure}
@@ -115,8 +116,8 @@ export default function Software() {
       <section className="container product-catalog">
         <div className="section-head">
           <div>
-            <span className="eyebrow">Escolha por operação</span>
-            <h2>O seu negócio não é genérico.</h2>
+            {/* <span className="eyebrow">Escolha por operação</span> */}
+            <h2>Nossos Softwares.</h2>
           </div>
           <Layers3 size={25} />
         </div>
@@ -133,14 +134,14 @@ export default function Software() {
                     Falar sobre esta solução <ArrowUpRight size={15} />
                   </Link>
                   <a
-                    className="product-download"
+                    className="button button-primary"
                     href={brochure}
                     download
                     onClick={() =>
                       trackEvent("software_download", { software: name })
                     }
                   >
-                    <Download size={14} /> Descarregar ficha
+                    <Download size={14} /> Baixar software
                   </a>
                 </div>
               </div>
@@ -162,7 +163,7 @@ export default function Software() {
         </Reveal>
         <Reveal delay={0.1}>
           <span className="eyebrow">Ver em contexto</span>
-          <h2>Não vendemos uma promessa. Mostramos o sistema.</h2>
+          <h2>Facilitar e dinamizar o seu trabalho no dia a dia.</h2>
           <p>
             Veja como o ecossistema visualiza a operação e depois fale connosco
             sobre a sua realidade.

@@ -6,8 +6,10 @@ export const siteConfig = {
   contact: {
     email: "geral.dylande@gmail.com",
     phone: "+244 928 271 370",
+    phone1: " +244 923 705 159",
+    phone2: "+244 951 657 129",
     whatsapp: "244928271370",
-    location: "Luanda, Angola · Seg–Sex, 08h–17h",
+    location: "Localização: Zango III, Icolo e Brngo-Angola · Seg–Sex, 08h–17h",
   },
   /* Canal dedicado ao programa de revendedores — número e mensagem próprios, independentes do contacto geral. */
   reseller: {

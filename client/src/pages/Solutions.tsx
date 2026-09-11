@@ -90,7 +90,7 @@ export default function Solutions() {
           </p><br></br>
           <button className="button button-primary">
             <a
-            href="https://wa.me/244923705159?text=Olá%2C%20gostaria%20de%20solicitar%20o%20kit%20de%20faturação%C3%A7%C3%A3o"
+            href="https://wa.me/244928271370?text=Olá%2C%20gostaria%20de%20solicitar%20o%20kit%20de%20faturação%C3%A7%C3%A3o"
             className="cta-button aos-init aos-animate"
             data-aos="fade-up"
             data-aos-delay="400"
