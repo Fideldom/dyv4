@@ -127,12 +127,6 @@ export default function Home() {
   return (
     <div className="home-page">
       <section className="hero-new">
-        <div
-          className="hero-new-media"
-          key={slide.image}
-          style={{ backgroundImage: `url(${slide.image})` }}
-        />
-        <div className="hero-new-shade" />
         <div className="container hero-new-inner">
           <div className="hero-new-copy">
             <MotionHeroTitle
@@ -143,13 +137,7 @@ export default function Home() {
               eyebrow={slide.eyebrow}
               title="O negócio cresce quando a operação ganha"
               accent={slide.accent}
-            /><br></br>
-            {/* <Reveal delay={0.35} trigger="mount">
-              <p>
-                A DYLANDE une software empresarial, consultoria e suporte
-                próximo para transformar complexidade em decisões simples.
-              </p>
-            </Reveal> <br></br> */}
+            />
             <Reveal delay={0.45} trigger="mount" className="hero-new-actions">
               <Magnetic>
                 <Link href="/software" className="button button-primary">
@@ -162,21 +150,13 @@ export default function Home() {
                 </Link>
               </Magnetic>
             </Reveal>
-            {/* <Reveal delay={0.55} trigger="mount" className="trust-line">
-              <span>
-                <Check size={14} /> Software próprio
-              </span>
-              <span>
-                <Check size={14} /> Suporte local
-              </span>
-              <span>
-                <Check size={14} /> Certificação AGT
-              </span>
-            </Reveal> */}
           </div>
           <div className="hero-new-side">
-            <span>DY / 2026</span>
-            <span>Operação em movimento</span>
+            <div
+              className="hero-side-media"
+              key={slide.image}
+              style={{ backgroundImage: `url(${slide.image})` }}
+            />
             <div className="hero-pager">
               {slides.map((s, i) => (
                 <button
@@ -193,32 +173,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* <Reveal y={10}>
-        <section className="proof-bar">
-          <div className="container proof-bar-grid">
-            <div>
-              <span>01</span>
-              <b>Software</b>
-              <small>feito para trabalhar</small>
-            </div>
-            <div>
-              <span>02</span>
-              <b>Serviço</b>
-              <small>que não desaparece</small>
-            </div>
-            <div>
-              <span>03</span>
-              <b>Confiança</b>
-              <small>que se documenta</small>
-            </div>
-            <div>
-              <span>04</span>
-              <b>Escala</b>
-              <small>que começa no essencial</small>
-            </div>
-          </div>
-        </section>
-      </Reveal> */}
       <section className="section-new intro-split">
         <div className="container split-grid">
           <Reveal>
@@ -408,17 +362,17 @@ export default function Home() {
             <span className="eyebrow">O próximo passo é concreto</span>
             <h2>faça crescer o seu negócio connosco</h2>
             <Magnetic>
-            <Link href="/contacto" className="button button-primary">
-              Agendar conversa <ArrowUpRight size={16} />
-            </Link>
-          </Magnetic>
+              <Link href="/contacto" className="button button-primary">
+                Agendar conversa <ArrowUpRight size={16} />
+              </Link>
+            </Magnetic>
           </Reveal>
           <Reveal>
             <img src={`${media}orcamento.png`} alt="orcamento" />
           </Reveal>
-          
         </div>
-      </section><br></br>
+      </section>
+      <br></br>
     </div>
   );
 }

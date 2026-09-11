@@ -21,6 +21,7 @@ export const siteConfig = {
   whatsappMessages: {
     default: "Olá, gostaria de conhecer as soluções da DYLANDE.",
     "/software": "Olá, gostaria de conhecer melhor um dos softwares da DYLANDE.",
+    "/parceiros": "Olá, vi a página de parceiros da DYLANDE e gostaria de saber mais.",
     "/servicos": "Olá, gostaria de falar sobre um serviço de TI.",
     "/solucoes": "Olá, gostaria de perceber qual a solução certa para a minha operação.",
     "/certificacoes": "Olá, vi as certificações da DYLANDE e gostaria de saber mais.",

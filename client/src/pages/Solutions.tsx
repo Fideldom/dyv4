@@ -80,7 +80,7 @@ export default function Solutions() {
         ))}
       </Reveal>
 
-      <div className="container solution-callout">
+      <div className="container solution-callout kit">
         <Reveal>
           <span className="eyebrow">O próximo passo é concreto</span>
           <h2>Kit Completo de Faturação - Apartir de 295.000 kz!</h2>
@@ -95,7 +95,7 @@ export default function Solutions() {
             data-aos="fade-up"
             data-aos-delay="400"
           >
-            Solicitar
+            Solicitar kit 
             <i className="fas fa-arrow-right"></i>
           </a>
           </button>
