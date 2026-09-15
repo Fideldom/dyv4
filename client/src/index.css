@@ -1225,10 +1225,14 @@ button {
    Não corta, não estica e adapta-se ao espaço disponível.
     */
 
+.product-row img {
+  border-radius: 10px;
+}
+
 .product-row > img {
   display: block;
-  width: 100%;
-  height: 280px;
+  width: 60%;
+  height: 220px;
   max-width: 100%;
   min-width: 0;
   aspect-ratio: auto;
@@ -2873,14 +2877,11 @@ button {
   .product-row > img {
     grid-column: 1 / -1;
     grid-row: 2;
-
     width: 100%;
     height: auto;
     max-width: 100%;
-
     object-fit: contain;
     object-position: center;
-
     padding: 10px;
   }
 }
@@ -2900,7 +2901,6 @@ button {
   .product-row-num {
     grid-column: 1;
     grid-row: auto;
-
     width: 36px;
     height: 36px;
   }
@@ -2913,13 +2913,10 @@ button {
   .product-row > img {
     grid-column: 1;
     grid-row: auto;
-
     width: 100%;
     height: auto;
     max-width: 100%;
-
     padding: 8px;
-
     object-fit: contain;
     object-position: center;
   }
