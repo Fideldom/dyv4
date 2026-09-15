@@ -25,22 +25,16 @@ import { trackEvent } from "@/lib/analytics";
 const media = "/media/";
 const slides = [
   {
-    image: `${media}IMG-20260905-WA0028.jpg`,
+    image: `${media}avatar.png`,
     eyebrow: "Software certificado para faturação electrónica",
     title: "O negócio cresce quando a operação ganha clareza.",
     accent: "clareza.",
   },
   {
-    image: `${media}IMG-20260901-WA0009.jpg`,
+    image: `${media}avatar1.png`,
     eyebrow: "Um ecossistema que acompanha a sua equipa",
     title: "Tecnologia que trabalha no mesmo ritmo da sua empresa.",
     accent: "ritmo.",
-  },
-  {
-    image: `${media}IMG-20260901-WA0010.jpg`,
-    eyebrow: "Controlo onde quer que esteja",
-    title: "Mais controlo para decidir com confiança.",
-    accent: "confiança.",
   },
 ];
 
