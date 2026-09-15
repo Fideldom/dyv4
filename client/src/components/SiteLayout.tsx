@@ -71,11 +71,11 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
               {label}
             </Link>
           ))}
-          <Magnetic>
+          {/* <Magnetic>
             <Link href="/contacto" className="header-cta" onClick={close}>
               Falar com a DYLANDE <ArrowUpRight size={15} />
             </Link>
-          </Magnetic>
+          </Magnetic> */}
         </nav>
         <div className="header-tools">
           <button

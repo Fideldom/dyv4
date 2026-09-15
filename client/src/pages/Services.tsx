@@ -54,13 +54,14 @@ const services: Array<[LucideIcon, string, string]> = [
 export default function Services() {
   return (
     <div className="inner-page">
-      <div className="container">
+      <div className="container conta-main">
         <PageIntro
           variant="mask"
           kicker="Serviços de tecnologia"
           title="A tecnologia certa é a que continua a funcionar depois do lançamento."
           text="A DYLANDE combina visão, execução e suporte para que cada investimento tecnológico tenha uma consequência prática no negócio."
         />
+        <img src={`${m}avatar1.png`} style={{width: '420px'}}></img><br />
       </div>
       <Reveal as="section" className="container service-grid-new" amount={0.1}>
         {services.map(([Icon, title, text], i) => (

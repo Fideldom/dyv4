@@ -13,7 +13,7 @@ import Solutions from "./pages/Solutions";
 import Software from "./pages/Software";
 import Certifications from "./pages/Certifications";
 import Partners from "./pages/Partners";
-import Contact from "./pages/Contact";
+// import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -29,7 +29,7 @@ export default function App() {
             <Route path="/software" component={Software} />
             <Route path="/parceiros" component={Partners} />
             <Route path="/certificacoes" component={Certifications} />
-            <Route path="/contacto" component={Contact} />
+            {/* <Route path="/contacto" component={Contact} /> */}
             <Route component={NotFound} />
           </Switch>
         </SiteLayout>
