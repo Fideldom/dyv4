@@ -57,7 +57,7 @@ const products: Array<[string, string, string, string]> = [
 export default function Software() {
   return (
     <div className="inner-page">
-      {/* ===== Catálogo — design da imagem ===== */}
+      {/*  Catálogo — design da imagem  */}
       <section className="sw-page">
         <div className="sw-container">
           <header className="sw-head">
@@ -117,7 +117,7 @@ export default function Software() {
         </div>
       </section>
 
-      {/* ===== Secções originais (mantidas) ===== */}
+      {/*  Secções originais (mantidas)  */}
       <section className="container product-feature">
         <Reveal>
           <span className="eyebrow">Software empresarial</span>
@@ -164,7 +164,7 @@ export default function Software() {
           />
           <span>01 / 06 · Sistema multi-dispositivo</span>
         </Reveal>
-      </section>
+      </section><br /><br />
 
       <section className="container product-video">
         <Reveal delay={0}>

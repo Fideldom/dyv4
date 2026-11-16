@@ -25,6 +25,7 @@ import {
 } from "@/components/motion/MotionHeroTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { PageTransition } from "@/components/motion/PageTransition";
+import "./site-header.css";
 
 const logo = "/media/IMG-20260831-WA0000.jpg";
 
