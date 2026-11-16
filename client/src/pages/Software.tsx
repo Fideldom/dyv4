@@ -6,7 +6,7 @@ import { ArrowRight, ArrowUpRight, Check, Download } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { trackEvent } from "@/lib/analytics";
-import "./software.css";
+import "./Software.css";
 
 const m = "/media/";
 const brochure = `${m}dylande-soft-ux-ui.pdf`;
