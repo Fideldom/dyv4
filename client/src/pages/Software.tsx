@@ -1,21 +1,21 @@
-/* DYLANDE — Navy Precision / Corporate Rebuild
-  Página de produto: demonstração visual, módulos sectoriais e caminho para compra.
- */
+/* DYLANDE — Página Software
+   Catálogo com o design "Nossos Softwares." (cartões numerados) + secções originais mantidas abaixo.
+*/
 import { Link } from "wouter";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  Download,
-  Layers3,
-} from "lucide-react";
-import { PageIntro } from "@/components/SiteLayout";
+import { ArrowRight, ArrowUpRight, Check, Download } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { trackEvent } from "@/lib/analytics";
+import "./software.css";
+
 const m = "/media/";
 const brochure = `${m}dylande-soft-ux-ui.pdf`;
-const products = [
+
+// Mude para true se quiser mostrar o botão "Baixar" em cada cartão (não aparece na imagem).
+const SHOW_DOWNLOAD = false;
+
+/*  Dados (os mesmos 6 produtos da página original)  */
+const products: Array<[string, string, string, string]> = [
   [
     "Faturação e Stock",
     "O núcleo",
@@ -53,17 +53,71 @@ const products = [
     "IMG-20260911-WA0013.jpg",
   ],
 ];
+
 export default function Software() {
   return (
     <div className="inner-page">
-      <div className="container">
-        <PageIntro
-          variant="fill"
-          kicker="Software DYLANDE"
-          title="Soluções Inteligentes para Seu Negócio."
-          text="Módulos especializados para cada segmento. Transforme sua gestão com tecnologia inovadora e resultados comprovados."
-        />
-      </div>
+      {/* ===== Catálogo — design da imagem ===== */}
+      <section className="sw-page">
+        <div className="sw-container">
+          <header className="sw-head">
+            <h1>
+              Nossos <span>Softwares.</span>
+            </h1>
+            <p>Soluções inteligentes para o seu negócio.</p>
+            <i className="sw-bar" />
+          </header>
+
+          <div className="sw-list">
+            {products.map(([name, label, text, image], i) => (
+              <Reveal as="div" delay={i * 0.08} key={name}>
+                <article className="sw-card">
+                  <div className="sw-num">0{i + 1}</div>
+                  <div className="sw-sep" />
+
+                  <div className="sw-body">
+                    <span className="sw-tag">
+                      <i />
+                      {label}
+                    </span>
+                    <h2>{name}</h2>
+                    <p>{text}</p>
+                    <div className="sw-actions">
+                      <Link href="/contacto" className="sw-more">
+                        <ArrowRight size={18} strokeWidth={2.4} />
+                        Saber mais
+                      </Link>
+                      {SHOW_DOWNLOAD && (
+                        <a
+                          className="sw-more sw-ghost"
+                          href={brochure}
+                          download
+                          onClick={() =>
+                            trackEvent("software_download", { software: name })
+                          }
+                        >
+                          <Download size={16} />
+                          Baixar
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="sw-media">
+                    <img
+                      src={encodeURI(`${m}${image}`)}
+                      alt={`Interface do software ${name}`}
+                      loading="lazy"
+                    />
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Secções originais (mantidas) ===== */}
       <section className="container product-feature">
         <Reveal>
           <span className="eyebrow">Software empresarial</span>
@@ -75,22 +129,21 @@ export default function Software() {
           </p>
           <ul className="check-list">
             <li>
-              <Check size={16} />
-              Facturação electrónica certificada
+              <Check size={16} /> Facturação electrónica certificada
             </li>
             <li>
-              <Check size={16} />
-              Gestão de stock e indicadores
+              <Check size={16} /> Gestão de stock e indicadores
             </li>
             <li>
-              <Check size={16} />
-              Acesso online e operação local
+              <Check size={16} /> Acesso online e operação local
             </li>
           </ul>
           <div className="product-actions">
             <Magnetic>
-              <a href="https://wa.me/244928271370?text=Olá%2C%20gostaria%20de%20solicitar%20um%20orçamento" 
-              className="button button-primary">
+              <a
+                href="https://wa.me/244928271370?text=Olá%2C%20gostaria%20de%20solicitar%20um%20orçamento"
+                className="button button-primary"
+              >
                 Solicitar orçamento <ArrowRight size={16} />
               </a>
             </Magnetic>
@@ -112,51 +165,17 @@ export default function Software() {
           <span>01 / 06 · Sistema multi-dispositivo</span>
         </Reveal>
       </section>
-      <section className="container product-catalog">
-        <div className="section-head">
-          <div>
-            {/* <span className="eyebrow">Escolha por operação</span> */}
-            <h2>Nossos Softwares.</h2>
-          </div>
-          <Layers3 size={25} />
-        </div>
-        <Reveal as="div" className="product-list" amount={0.1}>
-          {products.map(([name, label, text, image], i) => (
-            <article className="product-row" key={name}>
-              <div className="product-row-num">0{i + 1}</div>
-              <div className="product-row-copy">
-                <span className="eyebrow">{label}</span>
-                <h3>{name}</h3>
-                <p>{text}</p>
-                <div className="product-row-actions">
-                  <Link href="/contacto" className="text-link">
-                    Falar sobre esta solução <ArrowUpRight size={15} />
-                  </Link>
-                  <a
-                    className="button button-primary"
-                    href={brochure}
-                    download
-                    onClick={() =>
-                      trackEvent("software_download", { software: name })
-                    }
-                  >
-                    <Download size={14} /> Baixar software
-                  </a>
-                </div>
-              </div>
-              <img src={`${m}${image}`} alt="" />
-            </article>
-          ))}
-        </Reveal>
-      </section>
+
       <section className="container product-video">
         <Reveal delay={0}>
-          <video autoPlay
-              muted
-              loop
-              playsInline
-              controls
-              poster={`${m}IMG-20260901-WA0008.jpg`}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            poster={`${m}IMG-20260901-WA0008.jpg`}
+          >
             <source src={`${m}VID-20260901-WA0007.mp4`} type="video/mp4" />
           </video>
         </Reveal>

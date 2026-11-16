@@ -1,0 +1,286 @@
+/* DYLANDE — Página Software (classes prefixadas com sw- para não colidir com o resto do site) */
+
+.sw-page {
+  --sw-bg: #f8fbfd;
+  --sw-ink: #0b2a4a;
+  --sw-ink2: #2e4a63;
+  --sw-blue: #0b6fb0;
+  --sw-teal: #17a2b8;
+  --sw-card: rgba(255, 255, 255, 0.85);
+  --sw-card-b: #dbe8ee;
+  --sw-pill: #eaf4f9;
+  --sw-pill-ink: #0b4f86;
+  --sw-grad: linear-gradient(90deg, #0a6aa8, #16a9b7);
+  --sw-shadow: 0 6px 22px rgba(16, 90, 130, 0.12);
+
+  position: relative;
+  overflow: hidden;
+  background: var(--sw-bg);
+  color: var(--sw-ink);
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: 36px 0 56px;
+}
+
+/* Modo escuro (ajuste o seletor se o seu ThemeContext usar outro atributo) */
+:root.dark .sw-page,
+[data-theme="dark"] .sw-page {
+  --sw-bg: #07151f;
+  --sw-ink: #e8f3fa;
+  --sw-ink2: #a9c2d3;
+  --sw-blue: #4cb3ef;
+  --sw-card: rgba(18, 40, 56, 0.85);
+  --sw-card-b: #1f3d51;
+  --sw-pill: #13324a;
+  --sw-pill-ink: #8fd2f5;
+  --sw-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* Ondas decorativas do fundo */
+.sw-page::before,
+.sw-page::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+}
+.sw-page::before {
+  right: -180px;
+  top: 40px;
+  width: 520px;
+  height: 620px;
+  background: linear-gradient(160deg, rgba(53, 198, 214, 0.35), rgba(53, 198, 214, 0.05));
+  transform: rotate(-20deg);
+}
+.sw-page::after {
+  left: -160px;
+  bottom: -200px;
+  width: 420px;
+  height: 420px;
+  background: linear-gradient(20deg, rgba(23, 162, 184, 0.4), rgba(23, 162, 184, 0.05));
+}
+
+.sw-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1376px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/* Título */
+.sw-head h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--sw-ink);
+}
+.sw-head h1 span {
+  color: var(--sw-blue);
+}
+.sw-head p {
+  margin: 8px 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  color: var(--sw-ink2);
+}
+.sw-bar {
+  display: block;
+  width: 68px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--sw-grad);
+  margin: 16px 0 36px;
+}
+
+/* Lista e cartões */
+.sw-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sw-card {
+  display: flex;
+  align-items: center;
+  padding: 22px 30px 22px 36px;
+  min-height: 172px;
+  background: var(--sw-card);
+  border: 1.5px solid var(--sw-card-b);
+  border-radius: 30px;
+  box-shadow: var(--sw-shadow);
+  backdrop-filter: blur(6px);
+}
+
+.sw-num {
+  flex: none;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0b6fb0, #119aae);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(10, 110, 160, 0.28);
+}
+
+.sw-sep {
+  flex: none;
+  width: 2px;
+  height: 118px;
+  margin: 0 48px;
+  background: linear-gradient(180deg, transparent, var(--sw-teal), transparent);
+}
+
+.sw-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sw-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 12px 3px 10px;
+  border-radius: 999px;
+  background: var(--sw-pill);
+  color: var(--sw-pill-ink);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.sw-tag i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sw-blue);
+}
+
+.sw-card h2 {
+  margin: 6px 0 4px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--sw-ink);
+}
+.sw-card p {
+  margin: 0 0 12px;
+  max-width: 540px;
+  font-size: 0.98rem;
+  line-height: 1.3;
+  color: var(--sw-ink2);
+}
+
+.sw-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 22px 6px 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0b86a8, #14a7a8);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.sw-more:hover {
+  filter: brightness(1.08);
+}
+.sw-more:focus-visible {
+  outline: 3px solid #35c6d6;
+  outline-offset: 2px;
+}
+
+.sw-logo {
+  flex: none;
+  width: 190px;
+  height: 150px;
+  margin-right: clamp(0px, 9vw, 120px);
+}
+.sw-logo svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Responsivo */
+@media (max-width: 860px) {
+  .sw-sep {
+    margin: 0 20px;
+  }
+  .sw-logo {
+    width: 120px;
+    height: 96px;
+    margin-right: 0;
+  }
+}
+@media (max-width: 620px) {
+  .sw-card {
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 14px;
+  }
+  .sw-sep {
+    display: none;
+  }
+  .sw-num {
+    width: 52px;
+    height: 52px;
+  }
+  .sw-body {
+    flex-basis: 100%;
+    order: 3;
+  }
+  .sw-logo {
+    order: 2;
+    margin-left: auto;
+  }
+}
+
+/* Ações do cartão (Saber mais + Baixar opcional) */
+.sw-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.sw-more.sw-ghost {
+  background: transparent;
+  color: var(--sw-blue);
+  border: 1.5px solid var(--sw-teal);
+}
+
+/* Imagem real de cada software (substitui o logótipo SVG) */
+.sw-media {
+  flex: none;
+  width: 260px;
+  height: 150px;
+  margin-right: clamp(0px, 4vw, 60px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid var(--sw-card-b);
+  box-shadow: var(--sw-shadow);
+  background: var(--sw-pill);
+}
+.sw-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 860px) {
+  .sw-media {
+    width: 180px;
+    height: 110px;
+    margin-right: 0;
+  }
+}
+@media (max-width: 620px) {
+  .sw-media {
+    order: 2;
+    margin-left: auto;
+    width: 150px;
+    height: 96px;
+  }
+}
