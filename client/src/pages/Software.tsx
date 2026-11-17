@@ -26,7 +26,7 @@ const products: Array<[string, string, string, string]> = [
     "Restauração",
     "Turnos que fluem",
     "Pedidos, mesas, produtos e caixa com uma leitura operacional pensada para a realidade da restauração.",
-    "IMG-20260911-WA0010 - Cópia.jpg",
+    "IMG-20260911-WA0010.jpg",
   ],
   [
     "Hotelaria e Restauração",
