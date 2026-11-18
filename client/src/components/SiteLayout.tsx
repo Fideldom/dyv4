@@ -266,12 +266,12 @@ export const Layout = SiteLayout;
 export default SiteLayout;
 
 export function PageIntro({
-  kicker,
+  // kicker,
   title,
   text,
   variant = "mask",
 }: {
-  kicker: string;
+  // kicker: string;
   title: string;
   text: string;
   variant?: MotionTitleVariant;
@@ -280,7 +280,7 @@ export function PageIntro({
     <div className="page-intro">
       <MotionHeroTitle
         as="h1"
-        eyebrow={kicker}
+        // eyebrow={kicker}
         title={title}
         variant={variant}
       />

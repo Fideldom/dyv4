@@ -57,7 +57,7 @@ export default function Services() {
       <div className="container conta-main">
         <PageIntro
           variant="mask"
-          kicker="Serviços de tecnologia"
+          // kicker="Serviços de tecnologia"
           title="A tecnologia certa é a que continua a funcionar depois do lançamento."
           text="A DYLANDE combina visão, execução e suporte para que cada investimento tecnológico tenha uma consequência prática no negócio."
         />
@@ -86,7 +86,7 @@ export default function Services() {
               poster={`${m}IMG-20260901-WA0008.jpg`}>
             <source src={`${m}VID-20260905-WA0036 (1).mp4`} type="video/mp4" />
           </video>
-          <span className="eyebrow">Como trabalhamos</span>
+          {/* <span className="eyebrow">Como trabalhamos</span> */}
           <h2>Menos saltos no escuro. Mais decisões com contexto.</h2>
         </Reveal>
         <div className="method-steps">
@@ -106,7 +106,7 @@ export default function Services() {
       </section>
       <section className="container service-cta">
         <Reveal>
-          <span className="eyebrow">Tem um desafio específico?</span>
+          {/* <span className="eyebrow">Tem um desafio específico?</span> */}
           <h2>Começamos pela pergunta certa.</h2>
         </Reveal>
         <Magnetic>

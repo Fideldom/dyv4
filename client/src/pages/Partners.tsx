@@ -24,7 +24,7 @@ export default function Partners() {
       <div className="container">
         <PageIntro
           variant="fill"
-          kicker="Ecossistema DYLANDE"
+          // kicker="Ecossistema DYLANDE"
           title="Parceiros que tornam esta operação possível."
           text="Trabalhamos lado a lado com parceiros tecnológicos e institucionais para entregar software, suporte e infraestrutura em que o cliente pode confiar."
         />
@@ -42,7 +42,7 @@ export default function Partners() {
       <section className="container section-new partners-section">
         <Reveal className="section-head">
           <div>
-            <span className="eyebrow">Rede de parceiros</span>
+            {/* <span className="eyebrow">Rede de parceiros</span> */}
             <h2>Quem caminha connosco</h2>
           </div>
         </Reveal>

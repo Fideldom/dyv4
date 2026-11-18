@@ -170,7 +170,7 @@ export default function Home() {
       <section className="section-new intro-split">
         <div className="container split-grid">
           <Reveal>
-            <span className="eyebrow">Mais do que tecnologia</span>
+            {/* <span className="eyebrow">Mais do que tecnologia</span> */}
             <h2>
               Uma equipa para organizar o que mantém o negócio em movimento.
             </h2>
@@ -190,7 +190,7 @@ export default function Home() {
       <section className="section-new dark-panel">
         <div className="container dark-panel-grid">
           <Reveal>
-            <span className="eyebrow">O produto no centro</span>
+            {/* <span className="eyebrow">O produto no centro</span> */}
             <h2>
               Software empresarial com o aspecto de uma operação bem organizada.
             </h2>
@@ -227,7 +227,7 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <div>
-              <span className="eyebrow">O seu sector. O seu sistema.</span>
+              {/* <span className="eyebrow">O seu sector. O seu sistema.</span> */}
               <h2>Seis operações. Uma visão mais simples.</h2>
             </div>
             <Link href="/software" className="text-link">
@@ -257,8 +257,8 @@ export default function Home() {
       <section className="section-new authority-strip">
         <div className="container authority-grid">
           <Reveal>
-            <ShieldCheck size={25} />
-            <span className="eyebrow">Confiança documentada</span>
+            {/* <ShieldCheck size={25} />
+            <span className="eyebrow">Confiança documentada</span> */}
             <h2>Quando o software é crítico, a prova também é.</h2>
             <p>
               Os dois certificados AGT são apresentados com transparência,
@@ -275,7 +275,7 @@ export default function Home() {
       <section className="section-new reseller-section" id="revendedores">
         <div className="container reseller-hero">
           <Reveal>
-            <span className="eyebrow">Revendedor DYLANDE</span>
+            {/* <span className="eyebrow">Revendedor DYLANDE</span> */}
             <h2>Oportunidade de negócio exclusiva.</h2>
             <p>
               Torne-se nosso parceiro e ganhe 100% de comissão. Transforme a sua
@@ -321,7 +321,7 @@ export default function Home() {
         </Reveal>
         <div className="container reseller-plans-head">
           <Reveal>
-            <span className="eyebrow">Como se tornar parceiro</span>
+            {/* <span className="eyebrow">Como se tornar parceiro</span> */}
             <h2>Requisitos necessários para se tornar revendedor.</h2>
             <p>
               Documentos e condições essenciais para se tornar o nosso parceiro
@@ -353,7 +353,7 @@ export default function Home() {
       <section className="section-new final-cta">
         <div className="container final-cta-inner">
           <Reveal>
-            <span className="eyebrow">O próximo passo é concreto</span>
+            {/* <span className="eyebrow">O próximo passo é concreto</span> */}
             <h2>faça crescer o seu negócio connosco</h2>
             <Magnetic>
               <Link href="/contacto" className="button button-primary">

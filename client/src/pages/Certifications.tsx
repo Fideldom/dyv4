@@ -30,15 +30,15 @@ export default function Certifications() {
       <div className="container">
         <PageIntro
           variant="outline"
-          kicker="Certificações e confiança"
+          // kicker="Certificações e confiança"
           title="Quando o software entra no coração do negócio, a conformidade não é um detalhe."
           text="Apresentamos os documentos originais que sustentam o DYLANDE SOFTWARE, com os dados essenciais legíveis e acesso directo aos PDFs fornecidos."
         />
       </div>
       <Reveal as="section" className="container cert-intro">
-        <ShieldCheck size={28} />
+        {/* <ShieldCheck size={28} /> */}
         <div>
-          <span className="eyebrow">Autoridade documentada</span>
+          {/* <span className="eyebrow">Autoridade documentada</span> */}
           <h2>Confiança que se pode verificar.</h2>
           <p>
             Os certificados não são decoração. São a forma mais séria de mostrar
@@ -48,6 +48,7 @@ export default function Certifications() {
         </div>
       </Reveal>
       <Reveal as="section" className="container cert-grid" amount={0.1}>
+        {/*                    */}
         {docs.map(([n, title, number, text, file]) => (
           <article className="cert-card" key={file}>
             <div className="cert-card-top">
@@ -63,7 +64,7 @@ export default function Certifications() {
               <span>{number}</span>
             </div>
             <div className="cert-body">
-              <span className="eyebrow">{number}</span>
+              {/* <span className="eyebrow">{number}</span> */}
               <h2>{title}</h2>
               <p>{text}</p>
               <a

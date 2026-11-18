@@ -1,0 +1,300 @@
+/* =====================================================================
+   DYLANDE — site-background.css
+   =====================================================================
+   FUNDO DA PÁGINA — referência "Nossos Softwares"
+
+   Este ficheiro altera SOMENTE:
+   - fundo da página
+   - ondas decorativas do fundo
+
+   NÃO altera:
+   - header
+   - cards
+   - imagens
+   - textos
+   - botões
+   - espaçamentos
+   - estrutura HTML
+   ===================================================================== */
+
+/* =====================================================================
+   01. VARIÁVEIS
+   ===================================================================== */
+
+:root {
+  /* Fundo base limpo da referência */
+  --bg-top: #f7fafd;
+  --bg-mid: #f1f7fb;
+  --bg-bottom: #eaf4fa;
+
+  /* Brilhos ambientais muito suaves */
+  --bg-glow-top: rgba(124, 211, 229, 0.14);
+  --bg-glow-bottom: rgba(58, 188, 207, 0.10);
+
+  /* Intensidade das ondas */
+  --bg-wave-opacity: 1;
+
+  /* =================================================================
+     LEVE VÉU INFERIOR DIREITO (atrás do último cartão)
+     ================================================================= */
+
+  --bg-wave-br: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 180' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='brSoft' x1='0%25' y1='100%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23eef7fb' stop-opacity='0'/%3E%3Cstop offset='60%25' stop-color='%23d2eef7' stop-opacity='0.48'/%3E%3Cstop offset='100%25' stop-color='%239cdcea' stop-opacity='0.62'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M30 180 C165 140 295 100 420 20 L420 180 Z' fill='url(%23brSoft)'/%3E%3C/svg%3E");
+
+  /* =================================================================
+     ONDA SUPERIOR DIREITA (camadas sedosas idênticas à referência)
+     ================================================================= */
+
+  --bg-wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 920 520' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='trMist' x1='0%25' y1='75%25' x2='100%25' y2='15%25'%3E%3Cstop offset='0%25' stop-color='%23f5f9fc' stop-opacity='0'/%3E%3Cstop offset='40%25' stop-color='%23e3f2f9' stop-opacity='0.55'/%3E%3Cstop offset='78%25' stop-color='%23cdeaf5' stop-opacity='0.88'/%3E%3Cstop offset='100%25' stop-color='%23b2e0ef' stop-opacity='0.95'/%3E%3C/linearGradient%3E%3ClinearGradient id='trSky' x1='15%25' y1='90%25' x2='100%25' y2='5%25'%3E%3Cstop offset='0%25' stop-color='%23e8f6fb' stop-opacity='0'/%3E%3Cstop offset='38%25' stop-color='%23bce7f3' stop-opacity='0.65'/%3E%3Cstop offset='76%25' stop-color='%237cd3e5' stop-opacity='0.88'/%3E%3Cstop offset='100%25' stop-color='%234ec2d6' stop-opacity='0.95'/%3E%3C/linearGradient%3E%3ClinearGradient id='trTeal' x1='10%25' y1='85%25' x2='100%25' y2='15%25'%3E%3Cstop offset='0%25' stop-color='%237ed5e5' stop-opacity='0.15'/%3E%3Cstop offset='48%25' stop-color='%2345bdd2' stop-opacity='0.72'/%3E%3Cstop offset='85%25' stop-color='%2326a9c0' stop-opacity='0.92'/%3E%3Cstop offset='100%25' stop-color='%231c9ab3' stop-opacity='0.96'/%3E%3C/linearGradient%3E%3ClinearGradient id='trHighlight' x1='0%25' y1='100%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3Cstop offset='50%25' stop-color='%23ffffff' stop-opacity='0.52'/%3E%3Cstop offset='100%25' stop-color='%23e0f5fa' stop-opacity='0.25'/%3E%3C/linearGradient%3E%3Cfilter id='trSoftBlur' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeGaussianBlur stdDeviation='8'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M40 285 C210 265 395 235 555 155 C680 92 775 22 855 0 L920 0 L920 490 C785 450 665 395 495 365 C315 332 165 340 40 285 Z' fill='url(%23trMist)'/%3E%3Cpath d='M815 0 C745 78 675 162 575 245 C505 302 520 365 650 385 C765 402 855 415 920 455 L920 0 Z' fill='url(%23trSky)'/%3E%3Cpath d='M920 95 C835 128 760 198 695 282 C655 334 710 375 815 385 L920 395 Z' fill='url(%23trHighlight)' filter='url(%23trSoftBlur)'/%3E%3Cpath d='M920 112 C845 148 785 215 745 292 C718 345 775 395 865 425 L920 448 Z' fill='url(%23trTeal)'/%3E%3C/svg%3E");
+
+  /* =================================================================
+     ONDA INFERIOR ESQUERDA (baixa, alongada e suave)
+     ================================================================= */
+
+  --bg-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 150' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='blMist' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23bce7f3' stop-opacity='0.72'/%3E%3Cstop offset='65%25' stop-color='%23d9f0f8' stop-opacity='0.45'/%3E%3Cstop offset='100%25' stop-color='%23eef8fc' stop-opacity='0'/%3E%3C/linearGradient%3E%3ClinearGradient id='blCyan' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233abccf' stop-opacity='0.86'/%3E%3Cstop offset='60%25' stop-color='%236ed1e1' stop-opacity='0.72'/%3E%3Cstop offset='100%25' stop-color='%23a9e3ee' stop-opacity='0.28'/%3E%3C/linearGradient%3E%3ClinearGradient id='blDeep' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231ca0b7' stop-opacity='0.92'/%3E%3Cstop offset='100%25' stop-color='%234ec2d4' stop-opacity='0.55'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 12 C135 36 285 92 455 150 L0 150 Z' fill='url(%23blMist)'/%3E%3Cpath d='M0 54 C105 74 198 112 285 150 L0 150 Z' fill='url(%23blCyan)'/%3E%3Cpath d='M0 96 C62 108 112 128 152 150 L0 150 Z' fill='url(%23blDeep)'/%3E%3C/svg%3E");
+}
+
+/* =====================================================================
+   02. MODO ESCURO
+   ===================================================================== */
+
+.dark,
+html.dark {
+  --bg-top: #0a1730;
+  --bg-mid: #081425;
+  --bg-bottom: #06101e;
+
+  --bg-glow-top: rgba(15, 159, 224, 0.08);
+  --bg-glow-bottom: rgba(18, 166, 156, 0.07);
+
+  --bg-wave-opacity: 0.24;
+}
+
+/* =====================================================================
+   03. FUNDO BASE
+   ===================================================================== */
+
+body .inner-page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background-color: var(--bg-mid);
+  background-image:
+    var(--bg-wave-br),
+    radial-gradient(
+      900px 520px at 95% 8%,
+      var(--bg-glow-top),
+      transparent 68%
+    ),
+    radial-gradient(
+      760px 460px at 0% 100%,
+      var(--bg-glow-bottom),
+      transparent 68%
+    ),
+    linear-gradient(
+      155deg,
+      var(--bg-top) 0%,
+      var(--bg-mid) 46%,
+      var(--bg-bottom) 100%
+    );
+  background-repeat: no-repeat;
+  background-position: right bottom, right top, left bottom, center center;
+  background-size: clamp(220px, 28vw, 420px) clamp(100px, 13vw, 180px), auto, auto, 100% 100%;
+}
+
+/* =====================================================================
+   04. ONDA SUPERIOR DIREITA
+   ===================================================================== */
+
+body .inner-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(920px, 64vw);
+  height: min(520px, 46vh);
+  min-height: 300px;
+  pointer-events: none;
+  z-index: 0;
+
+  background-image: var(--bg-wave-top);
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 100% 100%;
+  opacity: var(--bg-wave-opacity);
+}
+
+/* =====================================================================
+   05. ONDA INFERIOR ESQUERDA
+   ===================================================================== */
+
+body .inner-page::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: clamp(240px, 32vw, 460px);
+  height: clamp(90px, 12vw, 155px);
+  pointer-events: none;
+  z-index: 0;
+
+  background-image: var(--bg-wave-bottom);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 100% 100%;
+  opacity: var(--bg-wave-opacity);
+}
+
+/* =====================================================================
+   06. SOFTWARE PAGE
+   ===================================================================== */
+
+body .sw-page {
+  position: relative;
+  background: transparent;
+}
+
+/* =====================================================================
+   07. CONTEÚDO ACIMA DAS ONDAS
+   ===================================================================== */
+
+body .inner-page > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* =====================================================================
+   08. TABLET / ECRÃ MÉDIO
+   ===================================================================== */
+
+@media (max-width: 1100px) {
+  body .inner-page::before {
+    width: 720px;
+    height: 410px;
+    min-height: 0;
+  }
+
+  body .inner-page::after {
+    width: 360px;
+    height: 130px;
+  }
+}
+
+/* =====================================================================
+   09. TABLET PEQUENO
+   ===================================================================== */
+
+@media (max-width: 900px) {
+  body .inner-page::before {
+    width: 600px;
+    height: 350px;
+    min-height: 0;
+    right: -30px;
+    opacity: 0.92;
+  }
+
+  body .inner-page::after {
+    width: 310px;
+    height: 115px;
+  }
+}
+
+/* =====================================================================
+   10. MOBILE
+   ===================================================================== */
+
+@media (max-width: 600px) {
+  body .inner-page::before {
+    width: 480px;
+    height: 290px;
+    right: -110px;
+    min-height: 0;
+    opacity: 0.72;
+  }
+
+  body .inner-page::after {
+    width: 260px;
+    height: 100px;
+    left: -15px;
+    opacity: 0.76;
+  }
+}
+
+/* =====================================================================
+   11. MOBILE PEQUENO
+   ===================================================================== */
+
+@media (max-width: 420px) {
+  body .inner-page::before {
+    width: 420px;
+    height: 255px;
+    right: -130px;
+    opacity: 0.62;
+  }
+
+  body .inner-page::after {
+    width: 220px;
+    height: 90px;
+    left: -20px;
+    opacity: 0.66;
+  }
+}
+
+/* =====================================================================
+   12. MODO ESCURO
+   ===================================================================== */
+
+.dark body .inner-page,
+html.dark body .inner-page {
+  background-color: #081425;
+  background-image:
+    radial-gradient(
+      900px 560px at 100% 0%,
+      rgba(21, 137, 175, 0.10),
+      transparent 70%
+    ),
+    radial-gradient(
+      700px 500px at 0% 100%,
+      rgba(20, 163, 177, 0.06),
+      transparent 70%
+    ),
+    linear-gradient(180deg, #0a172b 0%, #081425 50%, #06101e 100%);
+  background-size: auto, auto, 100% 100%;
+}
+
+.dark body .inner-page::before,
+html.dark body .inner-page::before {
+  opacity: 0.22;
+}
+
+.dark body .inner-page::after,
+html.dark body .inner-page::after {
+  opacity: 0.18;
+}
+
+/* =====================================================================
+   13. ACESSIBILIDADE
+   ===================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  body .inner-page::before,
+  body .inner-page::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =====================================================================
+   14. IMPRESSÃO
+   ===================================================================== */
+
+@media print {
+  body .inner-page::before,
+  body .inner-page::after {
+    display: none !important;
+  }
+
+  body .inner-page {
+    background: #ffffff !important;
+  }
+}

@@ -17,7 +17,13 @@ const MOTION_TAGS = {
   section: motion.section,
 } as const;
 
-const PLAIN_TAGS = { div: "div", span: "span", li: "li", article: "article", section: "section" } as const;
+const PLAIN_TAGS = {
+  div: "div",
+  span: "span",
+  li: "li",
+  article: "article",
+  section: "section",
+} as const;
 
 interface RevealProps {
   children: ReactNode;
@@ -34,7 +40,16 @@ interface RevealProps {
   trigger?: "scroll" | "mount";
 }
 
-export function Reveal({ children, delay = 0, y = 16, as = "div", className, once = true, amount = 0.3, trigger = "scroll" }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  y = 16,
+  as = "div",
+  className,
+  once = true,
+  amount = 0.3,
+  trigger = "scroll",
+}: RevealProps) {
   const reduceMotion = useReducedMotion();
   const Tag = MOTION_TAGS[as];
 
@@ -48,7 +63,10 @@ export function Reveal({ children, delay = 0, y = 16, as = "div", className, onc
     visible: { opacity: 1, y: 0 },
   };
 
-  const triggerProps = trigger === "mount" ? { animate: "visible" } : { whileInView: "visible", viewport: { once, amount } };
+  const triggerProps =
+    trigger === "mount"
+      ? { animate: "visible" }
+      : { whileInView: "visible", viewport: { once, amount } };
 
   return (
     <Tag
@@ -64,7 +82,15 @@ export function Reveal({ children, delay = 0, y = 16, as = "div", className, onc
 }
 
 /** Contentor com stagger para grelhas de cards — os filhos usam StaggerItem. */
-export function Stagger({ children, className, gap = 0.06 }: { children: ReactNode; className?: string; gap?: number }) {
+export function Stagger({
+  children,
+  className,
+  gap = 0.06,
+}: {
+  children: ReactNode;
+  className?: string;
+  gap?: number;
+}) {
   const reduceMotion = useReducedMotion();
   if (reduceMotion) return <div className={className}>{children}</div>;
 
@@ -81,14 +107,26 @@ export function Stagger({ children, className, gap = 0.06 }: { children: ReactNo
   );
 }
 
-export function StaggerItem({ children, className, as = "div" }: { children: ReactNode; className?: string; as?: "div" | "article" | "li" }) {
+export function StaggerItem({
+  children,
+  className,
+  as = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  as?: "div" | "article" | "li";
+}) {
   const Tag = MOTION_TAGS[as];
   const variants: Variants = {
     hidden: { opacity: 0, y: 18 },
     visible: { opacity: 1, y: 0 },
   };
   return (
-    <Tag className={className} variants={variants} transition={{ duration: 0.5, ease: EASE }}>
+    <Tag
+      className={className}
+      variants={variants}
+      transition={{ duration: 0.5, ease: EASE }}
+    >
       {children}
     </Tag>
   );

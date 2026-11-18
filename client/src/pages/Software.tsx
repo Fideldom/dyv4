@@ -7,6 +7,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { trackEvent } from "@/lib/analytics";
 import "./Software.css";
+import "./background.css"
 
 const m = "/media/";
 const brochure = `${m}dylande-soft-ux-ui.pdf`;
@@ -15,40 +16,41 @@ const brochure = `${m}dylande-soft-ux-ui.pdf`;
 const SHOW_DOWNLOAD = false;
 
 /*  Dados (os mesmos 6 produtos da página original)  */
-const products: Array<[string, string, string, string]> = [
+//                           string,
+const products: Array<[string, string, string]> = [
   [
     "Faturação e Stock",
-    "O núcleo",
+    // "O núcleo",
     "Facturação electrónica, produtos, clientes, fornecedores, stock e relatórios num fluxo mais controlado.",
     "IMG-20260905-WA0032.jpg",
   ],
   [
     "Restauração",
-    "Turnos que fluem",
+    // "Turnos que fluem",
     "Pedidos, mesas, produtos e caixa com uma leitura operacional pensada para a realidade da restauração.",
     "IMG-20260911-WA0010.jpg",
   ],
   [
     "Hotelaria e Restauração",
-    "Hospitalidade com controlo",
+    // "Hospitalidade com controlo",
     "Uma base digital para ligar reservas, serviços, consumos e gestão diária.",
     "IMG-20260905-WA0026.jpg",
   ],
   [
     "Lavandaria",
-    "Cada peça importa",
+    // "Cada peça importa",
     "Registo de entrada, estados, clientes e entregas para reduzir perdas e dar visibilidade ao trabalho.",
     "IMG-20260911-WA0015.jpg",
   ],
   [
     "Barbearia",
-    "Agenda em ordem",
+    // "Agenda em ordem",
     "Serviços, profissionais, agenda e histórico num sistema simples de operar.",
     "IMG-20260905-WA0030.jpg",
   ],
   [
     "Oficina",
-    "Da recepção à entrega",
+    // "Da recepção à entrega",
     "Ordens de serviço, peças, clientes e acompanhamento para uma oficina mais previsível.",
     "IMG-20260911-WA0013.jpg",
   ],
@@ -69,17 +71,18 @@ export default function Software() {
           </header>
 
           <div className="sw-list">
-            {products.map(([name, label, text, image], i) => (
+            {/*                  label, */}
+            {products.map(([name, text, image], i) => (
               <Reveal as="div" delay={i * 0.08} key={name}>
                 <article className="sw-card">
                   <div className="sw-num">0{i + 1}</div>
                   <div className="sw-sep" />
 
                   <div className="sw-body">
-                    <span className="sw-tag">
+                    {/* <span className="sw-tag">
                       <i />
                       {label}
-                    </span>
+                    </span> */}
                     <h2>{name}</h2>
                     <p>{text}</p>
                     <div className="sw-actions">
@@ -109,7 +112,20 @@ export default function Software() {
                       alt={`Interface do software ${name}`}
                       loading="lazy"
                     />
+                    <a
+                    href={encodeURI(`${m}${image}`)}
+                    download={`${name}.png`}
+                    className="download-btn"
+                    title={`Baixar ${name}`}>
+                      <Download size={18}></Download>
+                      <span>Baixar</span>
+                    </a>
                   </div>
+                  {/* Ô ícone deve ficar aqui! */}
+                  <div className="download-row">
+                    
+                  </div>
+                  
                 </article>
               </Reveal>
             ))}
@@ -120,7 +136,7 @@ export default function Software() {
       {/*  Secções originais (mantidas)  */}
       <section className="container product-feature">
         <Reveal>
-          <span className="eyebrow">Software empresarial</span>
+          {/* <span className="eyebrow">Software empresarial</span> */}
           <h2>Facilitar e dinamizar o seu trabalho no dia a dia.</h2>
           <p>
             O DYLANDE SOFTWARE foi concebido para dar continuidade ao dia a dia:
@@ -180,7 +196,7 @@ export default function Software() {
           </video>
         </Reveal>
         <Reveal delay={0.1}>
-          <span className="eyebrow">Ver em contexto</span>
+          {/* <span className="eyebrow">Ver em contexto</span> */}
           <h2>Facilitar e dinamizar o seu trabalho no dia a dia.</h2>
           <p>
             Veja como o ecossistema visualiza a operação e depois fale connosco

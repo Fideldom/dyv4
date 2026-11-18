@@ -60,7 +60,7 @@ export default function Solutions() {
       <div className="container">
         <PageIntro
           variant="drift"
-          kicker="Soluções por sector"
+          // kicker="Soluções por sector"
           title="Soluções Completas para o Seu Negócio."
           text="Software de gestão empresarial desenvolvido para otimizar suas operações e maximizar resultados."
         />

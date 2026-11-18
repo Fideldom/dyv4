@@ -110,7 +110,7 @@ export default function Company() {
       <div className="container">
         <PageIntro
           variant="blur"
-          kicker="Sobre a DYLANDE"
+          // kicker="Sobre a DYLANDE"
           title="Tecnologia próxima. Decisões mais seguras."
           text="Somos uma empresa angolana de software, serviços e consultoria de tecnologia. Desde 2020, somos referência em Angola em soluções que otimizam operações e impulsionam o crescimento."
         />
