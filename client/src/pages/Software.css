@@ -1,39 +1,25 @@
-/* =====================================================================
-   DYLANDE — software.css  (página Software + fundo, TUDO NUM SÓ FICHEIRO)
-   Medido sobre a imagem de referência (1344 px de largura):
-   - margens laterais ≈ 75 px  · cartões ≈ 150 px de altura · gap ≈ 14 px
-   - número 55×55 · separador a 100 px · botão ≈ 28 px de altura
-   - imagem à direita com ≈ 160 px de folga até à borda do cartão
-   Se ainda importa o site-background.css, pode remover o import:
-   o fundo já está incluído aqui (secção "FUNDO").
-   ===================================================================== */
-
-/* =====================================================================
-   TOKENS
-   ===================================================================== */
+/* Base e tokens */
 .sw-page {
   --sw-bg: #f8fbfd;
   --sw-ink: #0b2a4a;
   --sw-ink2: #2e4a63;
   --sw-blue: #0b6fb0;
   --sw-teal: #17a2b8;
+  --sw-card: rgba(255, 255, 255, 0.88);
   --sw-card-b: #dbe8ee;
   --sw-pill: #eaf4f9;
   --sw-pill-ink: #0b4f86;
   --sw-grad: linear-gradient(90deg, #0a6aa8, #16a9b7);
+  --sw-shadow: 0 6px 22px rgba(16, 90, 130, 0.12);
+  --sw-gap: clamp(20px, 3.4vw, 48px);
 
   position: relative;
   overflow: hidden;
   overflow-x: clip;
-  background: transparent;
+  background: var(--sw-bg);
   color: var(--sw-ink);
-  font-family:
-    "Poppins",
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-  padding: clamp(24px, 2.7vw, 36px) 0 clamp(36px, 4vw, 52px);
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: clamp(24px, 4vw, 36px) 0 clamp(36px, 6vw, 56px);
   -webkit-text-size-adjust: 100%;
 }
 .sw-page *,
@@ -42,33 +28,59 @@
   box-sizing: border-box;
 }
 
+/* Modo escuro (ajuste o seletor se o seu ThemeContext usar outro atributo) */
 :root.dark .sw-page,
 [data-theme="dark"] .sw-page {
+  --sw-bg: #07151f;
   --sw-ink: #e8f3fa;
   --sw-ink2: #a9c2d3;
   --sw-blue: #4cb3ef;
+  --sw-card: rgba(18, 40, 56, 0.88);
   --sw-card-b: #1f3d51;
   --sw-pill: #13324a;
   --sw-pill-ink: #8fd2f5;
+  --sw-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
 }
 
-/* margens laterais ≈ 5,4vw (75 px a 1344) — alinha com o cabeçalho */
+/* Ondas decorativas (escalam com o ecrã e nunca criam scroll lateral) */
+.sw-page::before,
+.sw-page::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+}
+.sw-page::before {
+  right: calc(-1 * clamp(80px, 12vw, 180px));
+  top: 40px;
+  width: clamp(240px, 36vw, 520px);
+  height: clamp(300px, 43vw, 620px);
+  background: linear-gradient(160deg, rgba(53, 198, 214, 0.35), rgba(53, 198, 214, 0.05));
+  transform: rotate(-20deg);
+}
+.sw-page::after {
+  left: calc(-1 * clamp(70px, 11vw, 160px));
+  bottom: calc(-1 * clamp(90px, 14vw, 200px));
+  width: clamp(200px, 29vw, 420px);
+  height: clamp(200px, 29vw, 420px);
+  background: linear-gradient(20deg, rgba(23, 162, 184, 0.4), rgba(23, 162, 184, 0.05));
+}
+
 .sw-container {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 1376px;
   margin: 0 auto;
-  padding-left: max(clamp(16px, 5.4vw, 75px), env(safe-area-inset-left, 0px));
-  padding-right: max(clamp(16px, 5.4vw, 75px), env(safe-area-inset-right, 0px));
+  padding-left: max(clamp(16px, 4vw, 40px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(16px, 4vw, 40px), env(safe-area-inset-right, 0px));
 }
 
-/* =====================================================================
-   TÍTULO
-   ===================================================================== */
+/* Título */
 .sw-head h1 {
   margin: 0;
-  font-size: clamp(1.9rem, 3.75vw, 3.1rem);
+  font-size: clamp(1.9rem, 5.2vw, 3.4rem);
   line-height: 1.1;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -79,29 +91,29 @@
   color: var(--sw-blue);
 }
 .sw-head p {
-  margin: 6px 0 0;
-  font-size: clamp(1rem, 1.65vw, 1.4rem);
-  line-height: 1.3;
+  margin: 8px 0 0;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  line-height: 1.35;
   color: var(--sw-ink2);
   text-wrap: pretty;
 }
 .sw-bar {
   display: block;
-  width: 60px;
-  height: 3px;
-  border-radius: 3px;
+  width: 68px;
+  height: 4px;
+  border-radius: 4px;
   background: var(--sw-grad);
-  margin: 14px 0 clamp(22px, 2.3vw, 30px);
+  margin: 16px 0 clamp(24px, 4vw, 36px);
 }
 
-/* =====================================================================
-   CARTÕES — compactos como na referência
+/* 
+   Lista e cartões — layout em grelha
    Desktop:  [num] [sep] [texto] [imagem]
-   ===================================================================== */
+    */
 .sw-list {
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.05vw, 14px);
+  gap: clamp(12px, 1.6vw, 18px);
 }
 
 .sw-card {
@@ -110,55 +122,35 @@
   grid-template-columns: auto auto minmax(0, 1fr) auto;
   grid-template-areas: "num sep body media";
   align-items: center;
-  column-gap: clamp(18px, 3.35vw, 45px);
-  padding: clamp(12px, 1.05vw, 15px) clamp(18px, 2.4vw, 32px);
-  border-radius: clamp(22px, 2.1vw, 28px);
-  /* vidro translúcido; o lado direito leva um tom azul suave como na referência */
-  background: linear-gradient(
-    100deg,
-    rgba(255, 255, 255, 0.93) 0%,
-    rgba(255, 255, 255, 0.82) 58%,
-    rgba(214, 238, 247, 0.58) 100%
-  );
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  box-shadow:
-    0 0 0 1px rgba(196, 217, 234, 0.55),
-    0 8px 24px rgba(16, 90, 130, 0.1);
+  column-gap: var(--sw-gap);
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.4vw, 30px) clamp(18px, 2vw, 24px) clamp(20px, 2.6vw, 36px);
+  background: var(--sw-card);
+  border: 1.5px solid var(--sw-card-b);
+  border-radius: clamp(22px, 2.6vw, 30px);
+  box-shadow: var(--sw-shadow);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-}
-:root.dark .sw-card,
-[data-theme="dark"] .sw-card {
-  background: linear-gradient(
-    100deg,
-    rgba(18, 40, 56, 0.93),
-    rgba(18, 40, 56, 0.8) 58%,
-    rgba(24, 70, 92, 0.62)
-  );
-  border-color: var(--sw-card-b);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .sw-num {
   grid-area: num;
-  width: clamp(46px, 4.1vw, 55px);
-  height: clamp(46px, 4.1vw, 55px);
-  border-radius: clamp(13px, 1.2vw, 16px);
+  width: clamp(48px, 5vw, 62px);
+  height: clamp(48px, 5vw, 62px);
+  border-radius: clamp(14px, 1.5vw, 18px);
   background: linear-gradient(135deg, #0b6fb0, #119aae);
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: clamp(1.2rem, 1.85vw, 1.5rem);
+  font-size: clamp(1.25rem, 2.3vw, 1.7rem);
   font-weight: 600;
   box-shadow: 0 6px 14px rgba(10, 110, 160, 0.28);
 }
 
 .sw-sep {
   grid-area: sep;
-  align-self: center;
+  align-self: stretch;
   width: 2px;
-  height: clamp(76px, 7.4vw, 100px);
-  margin-right: calc(-1 * clamp(0px, 0.67vw, 9px));
+  margin: 8px 0;
   background: linear-gradient(180deg, transparent, var(--sw-teal), transparent);
 }
 
@@ -170,15 +162,14 @@
 .sw-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   max-width: 100%;
-  padding: 2px 11px 2px 9px;
+  padding: 3px 12px 3px 10px;
   border-radius: 999px;
   background: var(--sw-pill);
   color: var(--sw-pill-ink);
-  font-size: clamp(0.72rem, 1vw, 0.8rem);
+  font-size: clamp(0.74rem, 1.4vw, 0.82rem);
   font-weight: 500;
-  line-height: 1.5;
 }
 .sw-tag i {
   flex: none;
@@ -189,8 +180,8 @@
 }
 
 .sw-card h2 {
-  margin: 5px 0 3px;
-  font-size: clamp(1.15rem, 1.6vw, 1.32rem);
+  margin: 8px 0 6px;
+  font-size: clamp(1.25rem, 2.6vw, 1.55rem);
   line-height: 1.2;
   font-weight: 600;
   color: var(--sw-ink);
@@ -198,39 +189,35 @@
   overflow-wrap: break-word;
 }
 .sw-card p {
-  margin: 0 0 9px;
-  max-width: 470px;
-  font-size: clamp(0.84rem, 1.07vw, 0.9rem);
-  line-height: 1.25;
+  margin: 0 0 14px;
+  max-width: 60ch;
+  font-size: clamp(0.9rem, 1.6vw, 0.98rem);
+  line-height: 1.45;
   color: var(--sw-ink2);
   text-wrap: pretty;
 }
 
-/* botão "Saber mais" ≈ 28 px de altura (em ecrãs de toque sobe para 44 px) */
+/* Botões */
 .sw-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 .sw-more {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 30px;
-  padding: 4px 18px 4px 13px;
+  gap: 10px;
+  min-height: 44px; /* alvo de toque confortável */
+  padding: 8px 22px 8px 16px;
   border-radius: 999px;
   background: linear-gradient(90deg, #0b86a8, #14a7a8);
   color: #fff;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
-}
-.sw-more svg {
-  width: 15px;
-  height: 15px;
 }
 .sw-more:active {
   filter: brightness(0.95);
@@ -249,54 +236,49 @@
     filter: brightness(1.08);
   }
 }
-@media (pointer: coarse) {
-  .sw-more {
-    min-height: 44px;
-    padding: 8px 22px 8px 16px;
-    font-size: 1rem;
-  }
-}
 
-/* =====================================================================
-   IMAGEM DO SOFTWARE — inteira, sem moldura, sem fundo
-   ≈ 160 px de folga até à borda direita do cartão (como na referência)
-   ===================================================================== */
+/* 
+  Imagem do software — inteira, sem moldura, sem fundo
+  (tamanho moderado para manter a estrutura do cartão)
+*/
 .sw-media {
   grid-area: media;
   display: flex;
-  flex-direction: column; /* imagem em cima, botão (se existir) por baixo */
+  flex-direction: column; /* Organiza a imagem em cima e o botão embaixo */
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: clamp(150px, 15vw, 250px);
-  margin-right: clamp(0px, 9.4vw, 170px);
+  gap: 12px; /* Espaço entre a imagem e o botão */
+  width: clamp(150px, 18vw, 230px);
+  /* Aumentamos um pouco a altura máxima/clamp para acomodar o botão sem esmagar a imagem */
+  height: auto; 
+  min-height: clamp(110px, 15vw, 190px);
+  margin-right: clamp(0px, 2vw, 24px);
   background: none;
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  overflow: visible;
+  overflow: visible;  
 }
+
 .sw-media img {
   display: block;
   width: 100%;
-  height: clamp(100px, 10.3vw, 140px);
+  height: clamp(100px, 12vw, 150px); /* Controla a altura da imagem mantendo flexibilidade */
   max-width: 100%;
-  object-fit: contain; /* mostra a imagem INTEIRA, sem cortar */
+  object-fit: contain;      /* mostra a imagem INTEIRA, sem cortar */
   object-position: center;
   mix-blend-mode: multiply; /* funde fundos brancos com o cartão claro */
   transition: transform 0.4s ease;
 }
-.sw-media:has(.download-btn) img {
-  height: clamp(78px, 7.4vw, 100px);
-}
+
+/* Estilo opcional sugerido para o botão ficar bem integrado embaixo */
 .download-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--sw-blue);
+  font-size: 0.85rem;
   text-decoration: none;
+  /* Adicione cores/estilos conforme o design do seu site (ex: cor de texto, fundo hover, etc.) */
 }
 :root.dark .sw-media img,
 [data-theme="dark"] .sw-media img {
@@ -308,39 +290,43 @@
   }
 }
 
-/* =====================================================================
-   RESPONSIVO
-   ===================================================================== */
+/* 
+  Responsivo — a estrutura do cartão mantém-se compacta
+*/
+
+/* Portáteis pequenos / tablet na horizontal */
 @media (max-width: 1099px) {
   .sw-media {
-    width: clamp(130px, 19vw, 210px);
-    margin-right: clamp(0px, 3.5vw, 36px);
+    width: clamp(140px, 20vw, 200px);
+    height: clamp(100px, 13vw, 140px);
+    margin-right: 0;
   }
 }
-/* tablet vertical / telemóvel grande: [num] [texto] [imagem] */
+
+/* Tablet em vertical / telemóvel grande: [num] [texto] [imagem] */
 @media (max-width: 759px) {
   .sw-card {
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas: "num body media";
     column-gap: 16px;
-    padding: 16px;
+    padding: 18px;
   }
   .sw-sep {
     display: none;
   }
   .sw-media {
     width: clamp(110px, 24vw, 160px);
-    margin-right: 0;
-  }
-  .sw-media img {
-    height: clamp(78px, 17vw, 112px);
+    height: clamp(84px, 18vw, 120px);
   }
 }
-/* telemóvel: linha 1 = número + imagem, linha 2 = texto */
+
+/* Telemóvel: linha 1 = número + imagem, linha 2 = texto */
 @media (max-width: 559px) {
   .sw-card {
     grid-template-columns: auto minmax(0, 1fr);
-    grid-template-areas: "num media" "body body";
+    grid-template-areas:
+      "num media"
+      "body body";
     row-gap: 12px;
     padding: 16px;
     border-radius: 24px;
@@ -348,14 +334,14 @@
   .sw-media {
     justify-self: end;
     width: clamp(120px, 44vw, 200px);
-  }
-  .sw-media img {
     height: clamp(84px, 28vw, 130px);
   }
   .sw-card p {
     max-width: none;
   }
 }
+
+/* Telemóveis estreitos: botões em largura total */
 @media (max-width: 419px) {
   .sw-actions {
     flex-direction: column;
@@ -364,9 +350,11 @@
     width: 100%;
   }
   .sw-card h2 {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
   }
 }
+
+/* Ecrãs mínimos (≤ 340px) */
 @media (max-width: 340px) {
   .sw-container {
     padding-left: 12px;
@@ -376,229 +364,13 @@
     padding: 12px;
   }
 }
+
+/* Respeitar quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce) {
   .sw-media img {
     transition: none;
   }
   .sw-card:hover .sw-media img {
     transform: none;
-  }
-}
-
-/* =====================================================================
-   ALINHAMENTO DO CABEÇALHO COM O CONTEÚDO (referência: ≈ 5,5vw de margem)
-   Só muda as variáveis de margem do cabeçalho; nada mais.
-   ===================================================================== */
-html body header.global-header.global-header {
-  --hd-pad-l: max(
-    16px,
-    env(safe-area-inset-left, 0px),
-    5.5vw,
-    calc((100vw - 1376px) / 2)
-  );
-  --hd-pad-r: max(
-    16px,
-    env(safe-area-inset-right, 0px),
-    5.5vw,
-    calc((100vw - 1376px) / 2)
-  );
-}
-@media (max-width: 560px) {
-  html body header.global-header.global-header {
-    --hd-pad-l: max(14px, env(safe-area-inset-left, 0px));
-    --hd-pad-r: max(14px, env(safe-area-inset-right, 0px));
-  }
-}
-
-/* =====================================================================
-   FUNDO (background) — igual ao da imagem de referência
-   ONDE FICA CADA COISA
-   - cor base ..................... secção F1/F3 (quase branco, levemente frio: #f5f7fc)
-   - onda superior direita ........ --bg-wave-top   → .inner-page::before (F4)
-   - onda inferior esquerda ....... --bg-wave-bottom → .sw-page::after   (F5)
-   ===================================================================== */
-
-/* F1. variáveis */
-:root {
-  --bg-top: #f7f9fd;
-  --bg-mid: #f5f7fc;
-  --bg-bottom: #f2f5fb;
-  --bg-glow-top: rgba(124, 211, 229, 0.1);
-  --bg-glow-bottom: rgba(58, 188, 207, 0.07);
-  --bg-wave-opacity: 1;
-
-  /* ONDA SUPERIOR DIREITA — cunhas encaixadas no canto que alargam para baixo-esquerda
-     (pálida → azul-céu → turquesa), com um tom que continua por trás dos cartões */
-  --bg-wave-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 340' preserveAspectRatio='none'%3E %3Cdefs%3E %3ClinearGradient id='p' x1='0' y1='.45' x2='1' y2='.15'%3E%3Cstop offset='0' stop-color='%23dff0f8' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='%23cdeaf5' stop-opacity='.45'/%3E%3Cstop offset='1' stop-color='%23aee0ee' stop-opacity='.85'/%3E%3C/linearGradient%3E %3ClinearGradient id='s' x1='0' y1='.6' x2='1' y2='.1'%3E%3Cstop offset='0' stop-color='%23bfe7f3' stop-opacity='.25'/%3E%3Cstop offset='1' stop-color='%2385d6ed' stop-opacity='.8'/%3E%3C/linearGradient%3E %3ClinearGradient id='t' x1='0' y1='.8' x2='1' y2='.1'%3E%3Cstop offset='0' stop-color='%236fc9de' stop-opacity='.75'/%3E%3Cstop offset='1' stop-color='%233fb4cf' stop-opacity='.95'/%3E%3C/linearGradient%3E %3ClinearGradient id='b' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%2396d7eb' stop-opacity='.26'/%3E%3Cstop offset='1' stop-color='%2396d7eb' stop-opacity='0'/%3E%3C/linearGradient%3E %3C/defs%3E %3Cpath d='M398 0 C330 45 170 112 28 152 C140 178 300 192 420 210 C505 223 560 245 600 285 L600 0 Z' fill='url(%23p)'/%3E %3Cpath d='M450 170 C490 215 545 252 600 268 L600 340 L480 340 C470 280 462 225 450 170 Z' fill='url(%23b)'/%3E %3Cpath d='M548 26 C515 72 458 118 396 150 C468 166 540 186 600 222 L600 20 Z' fill='url(%23s)'/%3E %3Cpath d='M600 60 C578 96 546 132 518 168 C552 182 580 198 600 214 Z' fill='url(%23t)'/%3E %3Cpath d='M600 110 C570 140 548 170 536 196 C560 205 582 214 600 228 Z' fill='%23ffffff' fill-opacity='.26'/%3E %3C/svg%3E");
-
-  /* ONDA INFERIOR ESQUERDA — cunha pequena no canto: azul-claro por fora, turquesa por dentro */
-  --bg-wave-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 100' preserveAspectRatio='none'%3E %3Cdefs%3E %3ClinearGradient id='o' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23a7ddf0' stop-opacity='.85'/%3E%3Cstop offset='1' stop-color='%23cdebf5' stop-opacity='.2'/%3E%3C/linearGradient%3E %3ClinearGradient id='m' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238fd3e6' stop-opacity='.9'/%3E%3Cstop offset='1' stop-color='%23a9e1ee' stop-opacity='.35'/%3E%3C/linearGradient%3E %3ClinearGradient id='d' x1='1' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232299b0'/%3E%3Cstop offset='1' stop-color='%2333b4c6'/%3E%3C/linearGradient%3E %3C/defs%3E %3Cpath d='M0 6 C52 16 118 52 170 100 L0 100 Z' fill='url(%23o)'/%3E %3Cpath d='M0 36 C44 46 92 68 128 100 L0 100 Z' fill='url(%23m)'/%3E %3Cpath d='M0 58 C34 66 70 82 98 100 L0 100 Z' fill='url(%23d)'/%3E %3C/svg%3E");
-}
-/* F2. modo escuro */
-.dark,
-html.dark {
-  --bg-top: #0a1730;
-  --bg-mid: #081425;
-  --bg-bottom: #06101e;
-  --bg-glow-top: rgba(15, 159, 224, 0.08);
-  --bg-glow-bottom: rgba(18, 166, 156, 0.07);
-  --bg-wave-opacity: 0.24;
-}
-
-/* F3. fundo base das páginas internas (mistura muito suave, quase branco) */
-body .inner-page {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background-color: var(--bg-mid);
-  background-image:
-    radial-gradient(900px 520px at 95% 8%, var(--bg-glow-top), transparent 68%),
-    radial-gradient(
-      760px 460px at 0% 100%,
-      var(--bg-glow-bottom),
-      transparent 68%
-    ),
-    linear-gradient(
-      155deg,
-      var(--bg-top) 0%,
-      var(--bg-mid) 46%,
-      var(--bg-bottom) 100%
-    );
-  background-repeat: no-repeat;
-  background-size:
-    auto,
-    auto,
-    100% 100%;
-}
-
-/* F4. ONDA SUPERIOR DIREITA — começa logo abaixo do cabeçalho (44vw ≈ 590 px a 1344) */
-body .inner-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: clamp(300px, 44vw, 880px);
-  height: auto;
-  aspect-ratio: 600 / 340;
-  pointer-events: none;
-  z-index: 0;
-  background-image: var(--bg-wave-top);
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-size: 100% 100%;
-  opacity: var(--bg-wave-opacity);
-}
-
-/* F5. ONDA INFERIOR ESQUERDA — no fim do catálogo da página Software */
-body .sw-page::before {
-  display: none;
-} /* ondas antigas desligadas */
-body .sw-page::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: clamp(110px, 12.5vw, 220px);
-  height: auto;
-  aspect-ratio: 170 / 100;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 0;
-  transform: none;
-  background-image: var(--bg-wave-bottom);
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: 100% 100%;
-  opacity: var(--bg-wave-opacity);
-}
-/* nas outras páginas internas a onda inferior fica no fim da página */
-body .inner-page:not(:has(.sw-page))::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: clamp(110px, 12.5vw, 220px);
-  height: auto;
-  aspect-ratio: 170 / 100;
-  pointer-events: none;
-  z-index: 0;
-  background-image: var(--bg-wave-bottom);
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: 100% 100%;
-  opacity: var(--bg-wave-opacity);
-}
-body .inner-page:has(.sw-page)::after {
-  display: none;
-}
-
-/* F6. conteúdo sempre acima das ondas */
-body .inner-page > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* F7. ecrãs pequenos: ondas mais discretas e deslocadas */
-@media (max-width: 900px) {
-  body .inner-page::before {
-    width: 420px;
-    right: -40px;
-    opacity: 0.85;
-  }
-}
-@media (max-width: 600px) {
-  body .inner-page::before {
-    width: 340px;
-    right: -70px;
-    opacity: 0.65;
-  }
-  body .sw-page::after {
-    left: -10px;
-    opacity: 0.8;
-  }
-}
-@media (max-width: 420px) {
-  body .inner-page::before {
-    width: 300px;
-    right: -90px;
-    opacity: 0.55;
-  }
-}
-
-/* F8. modo escuro */
-.dark body .inner-page,
-html.dark body .inner-page {
-  background-color: #081425;
-  background-image:
-    radial-gradient(
-      900px 560px at 100% 0%,
-      rgba(21, 137, 175, 0.1),
-      transparent 70%
-    ),
-    radial-gradient(
-      700px 500px at 0% 100%,
-      rgba(20, 163, 177, 0.06),
-      transparent 70%
-    ),
-    linear-gradient(180deg, #0a172b 0%, #081425 50%, #06101e 100%);
-  background-size:
-    auto,
-    auto,
-    100% 100%;
-}
-.dark body .inner-page::before,
-html.dark body .inner-page::before {
-  opacity: 0.22;
-}
-
-/* F9. impressão */
-@media print {
-  body .inner-page::before,
-  body .inner-page::after,
-  body .sw-page::after {
-    display: none !important;
-  }
-  body .inner-page {
-    background: #fff !important;
   }
 }

@@ -1,24 +1,4 @@
-/* =====================================================================
-   DYLANDE — background.css
-   Fundo da página Software (ondas FIXAS à janela) + vidro dos cartões.
-
-   NÃO altera: header, textos, imagens, botões, espaçamentos, JSX.
-
-   ONDE FICA CADA COISA
-   - cor/mistura base ............ secção 3  (body::after, degradê 155° fixo)
-   - onda superior direita ....... secção 4  (--bg-wave-top,   camada 1 de body::before)
-   - triângulo inferior esquerdo . secção 4  (--bg-wave-bottom, camada 2)  ← ângulo de 90°
-   - véu inferior direito ........ secção 4  (--bg-wave-br,    camada 3)
-   - fita azul dentro do cartão .. secção 7  (--card-wave, .sw-card::before)
-
-   COMO FICA "FIXO": o fundo está no próprio <body> (body::before / ::after com
-   position:fixed). Assim nenhuma animação de página (transform) o consegue prender
-   ao conteúdo: o conteúdo rola e as ondas ficam paradas na janela.
-   ===================================================================== */
-
-/* =====================================================================
-   1. VARIÁVEIS
-   ===================================================================== */
+/* VARIÁVEIS */
 :root {
   --bg-top: #f7fafd;
   --bg-mid: #f1f7fb;
@@ -47,9 +27,7 @@ html.dark {
   --bg-wave-opacity: 0.26;
 }
 
-/* =====================================================================
-   2. DESLIGA AS ONDAS ANTIGAS (do CSS global e do Software.css)
-   ===================================================================== */
+/* DESLIGA AS ONDAS ANTIGAS (do CSS global e do Software.css) */
 body .inner-page::before,
 body .inner-page::after,
 body .sw-page::before,
@@ -80,9 +58,7 @@ body .inner-page > * {
   z-index: 2;
 }
 
-/* =====================================================================
-   3. FUNDO BASE — degradê 155° (fixo à janela). Só aparece em páginas com .inner-page
-   ===================================================================== */
+/* FUNDO BASE — degradê 155° (fixo à janela). Só aparece em páginas com .inner-page */
 body:has(.inner-page)::after {
   content: "";
   position: fixed;
@@ -97,10 +73,10 @@ body:has(.inner-page)::after {
   );
 }
 
-/* =====================================================================
-   4. ONDAS FIXAS — 3 camadas, acima do degradê e abaixo do conteúdo
+/* 
+   ONDAS FIXAS — 3 camadas, acima do degradê e abaixo do conteúdo
    camada 1: superior direita · camada 2: triângulo inferior esquerdo · camada 3: inferior direito
-   ===================================================================== */
+*/
 body:has(.inner-page)::before {
   content: "";
   position: fixed;
@@ -122,9 +98,7 @@ body:has(.inner-page)::before {
     clamp(220px, 28vw, 420px) clamp(100px, 13vw, 180px);
 }
 
-/* =====================================================================
-   5. RESPONSIVO DO FUNDO
-   ===================================================================== */
+/* RESPONSIVO DO FUNDO */
 @media (max-width: 1240px) {
   :root {
     --bg-top-offset: 84px;
@@ -144,10 +118,10 @@ body:has(.inner-page)::before {
   }
 }
 
-/* =====================================================================
-   7. CARTÕES — vidro + fita azul na metade direita (cores mais carregadas)
-   OPCIONAL: apague este bloco para voltar ao cartão anterior.
-   ===================================================================== */
+/* 
+ CARTÕES — vidro + fita azul na metade direita (cores mais carregadas)
+ OPCIONAL: apague este bloco para voltar ao cartão anterior.
+*/
 body .sw-card {
   position: relative;
   background: rgba(255, 255, 255, 0.88);
@@ -191,9 +165,7 @@ html.dark body .sw-card::before {
   opacity: 0.35;
 }
 
-/* =====================================================================
-   8. IMPRESSÃO
-   ===================================================================== */
+/* IMPRESSÃO */
 @media print {
   body:has(.inner-page)::before,
   body:has(.inner-page)::after,

@@ -1,5 +1,6 @@
-/* DYLANDE — Página Software
-   Catálogo com o design "Nossos Softwares." (cartões numerados) + secções originais mantidas abaixo.
+/* 
+  DYLANDE — Página Software
+  Catálogo com o design "Nossos Softwares." (cartões numerados) + secções originais mantidas abaixo.
 */
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight, Check, Download } from "lucide-react";
@@ -7,7 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { trackEvent } from "@/lib/analytics";
 import "./Software.css";
-import "./background.css"
+import "./background.css";
 
 const m = "/media/";
 const brochure = `${m}dylande-soft-ux-ui.pdf`;
@@ -113,19 +114,17 @@ export default function Software() {
                       loading="lazy"
                     />
                     <a
-                    href={encodeURI(`${m}${image}`)}
-                    download={`${name}.png`}
-                    className="download-btn"
-                    title={`Baixar ${name}`}>
+                      href={encodeURI(`${m}${image}`)}
+                      download={`${name}.png`}
+                      className="download-btn"
+                      title={`Baixar ${name}`}
+                    >
                       <Download size={18}></Download>
                       <span>Baixar</span>
                     </a>
                   </div>
                   {/* Ô ícone deve ficar aqui! */}
-                  <div className="download-row">
-                    
-                  </div>
-                  
+                  <div className="download-row"></div>
                 </article>
               </Reveal>
             ))}
@@ -180,7 +179,9 @@ export default function Software() {
           />
           <span>01 / 06 · Sistema multi-dispositivo</span>
         </Reveal>
-      </section><br /><br />
+      </section>
+      <br />
+      <br />
 
       <section className="container product-video">
         <Reveal delay={0}>
