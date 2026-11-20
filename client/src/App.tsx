@@ -1,6 +1,6 @@
-/**
- * DYLANDE — Navy Precision / Corporate Rebuild
- * Rotas públicas organizadas por intenção: confiança, oferta, produto e contacto.
+/*
+  DYLANDE — Navy Precision / Corporate Rebuild
+  Rotas públicas organizadas por intenção: confiança, oferta, produto e contacto.
  */
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Route, Switch } from "wouter";
@@ -11,6 +11,7 @@ import Company from "./pages/Company";
 import Services from "./pages/Services";
 import Solutions from "./pages/Solutions";
 import Software from "./pages/Software";
+import Agt from "./pages/Agt";
 import Certifications from "./pages/Certifications";
 import Partners from "./pages/Partners";
 // import Contact from "./pages/Contact";
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/servicos" component={Services} />
             <Route path="/solucoes" component={Solutions} />
             <Route path="/software" component={Software} />
+            <Route path="/agt" component={Agt} />
             <Route path="/parceiros" component={Partners} />
             <Route path="/certificacoes" component={Certifications} />
             {/* <Route path="/contacto" component={Contact} /> */}

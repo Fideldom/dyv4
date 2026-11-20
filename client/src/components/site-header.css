@@ -1,30 +1,35 @@
-/* DYLANDE — Cabeçalho responsivo + menu hambúrguer (versão reforçada)
+/* DYLANDE — Cabeçalho responsivo + menu hambúrguer
    Usa as classes do SiteLayout: header.global-header · .brand-lockup · nav (.mobile-open)
    .header-tools · .icon-button · .header-cta · .menu-toggle
-   NÃO depende de "header-solid". Os seletores são fortes e as propriedades críticas
-   usam !important para vencer qualquer CSS antigo que esteja a interferir.
-   Importe este ficheiro no SiteLayout.tsx, DEPOIS do CSS global. */
+   Não depende de "header-solid".
+   Os seletores são fortes para evitar interferências de CSS antigo.
+   Importe este ficheiro no SiteLayout.tsx depois do CSS global. */
 
-/* =========================================================
-   Variáveis + base
-   ========================================================= */
+/* Variáveis + base */
+
 html body header.global-header {
   --hd-h: 110px;
+
   --hd-bg1: #fbfdfe;
   --hd-bg2: #f1f8fb;
   --hd-line: #a9d3e2;
+
   --hd-ink: #0b2a4a;
   --hd-ink2: #4a6478;
+
   --hd-brand: #0b4f86;
   --hd-blue: #0b6fb0;
   --hd-teal: #17a2b8;
+
   --hd-pill: #eaf4f9;
   --hd-grad: linear-gradient(90deg, #0a6aa8, #16a9b7);
+
   --hd-pad-l: max(
     16px,
     env(safe-area-inset-left, 0px),
     calc((100vw - 1376px) / 2)
   );
+
   --hd-pad-r: max(
     16px,
     env(safe-area-inset-right, 0px),
@@ -32,28 +37,41 @@ html body header.global-header {
   );
 
   box-sizing: border-box;
+
   position: sticky !important;
   top: 0 !important;
   z-index: 100;
+
   display: flex;
   align-items: center;
+
   gap: 20px;
+
   width: 100%;
   min-height: var(--hd-h);
+
   padding: calc(10px + env(safe-area-inset-top, 0px)) var(--hd-pad-r) 10px
     var(--hd-pad-l);
+
   background: linear-gradient(180deg, var(--hd-bg1), var(--hd-bg2)) !important;
+
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+
   border-bottom: 2px solid var(--hd-line);
+
   box-shadow: none;
+
   color: var(--hd-ink);
 }
+
 html body header.global-header *,
 html body header.global-header *::before,
 html body header.global-header *::after {
   box-sizing: border-box;
 }
+
+/* Tema escuro */
 
 html.dark body header.global-header,
 html[data-theme="dark"] body header.global-header,
@@ -62,151 +80,240 @@ html[data-theme="dark"] body header.global-header,
   --hd-bg1: #0b2230;
   --hd-bg2: #07151f;
   --hd-line: #1f3d51;
+
   --hd-ink: #e8f3fa;
   --hd-ink2: #9fbacd;
+
   --hd-brand: #8fd2f5;
   --hd-blue: #4cb3ef;
+
   --hd-pill: #13324a;
 }
 
-/* ---------- Marca ---------- */
+/* Marca */
+
 html body header.global-header .brand-lockup {
   display: flex;
   align-items: center;
+
   gap: 14px;
+
   flex: 0 1 auto;
   min-width: 0;
+
   text-decoration: none;
   color: inherit;
 }
+
 html body header.global-header .brand-lockup img {
   height: 68px;
   width: auto;
   max-width: 96px;
+
   object-fit: contain;
+
   border-radius: 12px;
+
   flex: none;
 }
+
 html body header.global-header .brand-lockup span {
   display: block;
   min-width: 0;
 }
+
 html body header.global-header .brand-lockup b {
   display: block;
+
   font-size: 2.1rem;
   line-height: 1;
+
   font-weight: 700;
   letter-spacing: 0.02em;
+
   color: var(--hd-brand);
-  white-space: nowrap;
-}
-html body header.global-header .brand-lockup small {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  line-height: 1.25;
-  color: var(--hd-ink);
+
   white-space: nowrap;
 }
 
-/* ---------- Menu (desktop) — sempre visível acima de 1240px ---------- */
+html body header.global-header .brand-lockup small {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.25;
+
+  color: var(--hd-ink);
+
+  white-space: nowrap;
+}
+
+/* Menu desktop
+   Fica disponível apenas quando existe espaço suficiente. */
+
 html body header.global-header nav {
   display: flex !important;
+
   position: static !important;
+
+  flex: 1 1 auto;
+  min-width: 0;
+
   flex-direction: row !important;
   flex-wrap: nowrap;
+
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin: 0 auto !important;
+
+  gap: 2px;
+
+  margin: 0 !important;
   padding: 0 !important;
+
   width: auto !important;
   height: auto !important;
+
   max-height: none !important;
-  min-width: 0;
+
   overflow: visible !important;
+
   background: transparent !important;
+
   border: 0 !important;
+
   box-shadow: none !important;
+
   transform: none !important;
+
   opacity: 1 !important;
   visibility: visible !important;
+
   animation: none;
 }
+
 html body header.global-header nav a {
-  display: flex;
+  display: inline-flex;
+
   align-items: center;
-  gap: 9px;
-  padding: 12px 20px;
+  justify-content: center;
+
+  gap: 7px;
+
+  flex: 0 1 auto;
+  min-width: 0;
+
+  padding: 10px 13px;
+
   border-radius: 999px;
-  font-size: 0.98rem;
+
+  font-size: 0.9rem;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.15;
+
   color: var(--hd-ink);
+
   text-decoration: none;
+
   white-space: nowrap;
+
   transition:
     background 0.2s,
     color 0.2s;
+
   -webkit-tap-highlight-color: transparent;
 }
+
 html body header.global-header nav a svg {
-  flex: none;
+  flex: 0 0 auto;
+
+  width: 19px;
+  height: 19px;
 }
+
 html body header.global-header nav a::after {
   content: none;
 }
+
 html body header.global-header nav a.active {
   background: var(--hd-grad);
+
   color: #fff !important;
+
   box-shadow: 0 6px 16px rgba(10, 106, 168, 0.3);
 }
+
 @media (hover: hover) {
   html body header.global-header nav a:hover:not(.active) {
     background: var(--hd-pill);
   }
 }
 
-/* ---------- Ferramentas ---------- */
+/* Ferramentas */
+
 html body header.global-header .header-tools {
   display: flex;
   align-items: center;
+
   gap: 10px;
+
   flex: none;
 }
+
 html body header.global-header .icon-button,
 html body header.global-header .menu-toggle {
   display: grid;
   place-items: center;
+
   width: 44px;
   height: 44px;
+
   padding: 0;
+
   border-radius: 50%;
+
   border: 1.5px solid var(--hd-teal);
+
   background: transparent;
+
   color: var(--hd-blue);
+
   cursor: pointer;
+
   -webkit-tap-highlight-color: transparent;
 }
+
 html body header.global-header .menu-toggle {
   display: none !important;
-} /* só aparece em ≤1240px */
+}
+
 html body header.global-header .header-cta {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 10px;
+
   padding: 12px 32px;
+
   border-radius: 999px;
+
   border: 1.5px solid var(--hd-teal);
+
   background: transparent;
+
   color: var(--hd-blue);
+
   font-size: 1rem;
   font-weight: 600;
+
   text-decoration: none;
+
   white-space: nowrap;
 }
+
 @media (hover: hover) {
   html body header.global-header .icon-button:hover,
   html body header.global-header .menu-toggle:hover,
@@ -214,301 +321,412 @@ html body header.global-header .header-cta {
     background: var(--hd-pill);
   }
 }
+
 html body header.global-header a:focus-visible,
 html body header.global-header button:focus-visible {
   outline: 3px solid #35c6d6;
   outline-offset: 2px;
 }
 
-/* =========================================================
-   Desktop compacto (1241–1439px)
-   ========================================================= */
-@media (max-width: 1439px) {
+/* Desktop grande
+   Mantém o menu completo onde existe espaço suficiente. */
+
+@media (min-width: 1501px) {
   html body header.global-header {
-    gap: 14px;
+    gap: 18px;
   }
-  html body header.global-header .brand-lockup {
-    gap: 12px;
-  }
-  html body header.global-header .brand-lockup img {
-    height: 60px;
-    max-width: 84px;
-  }
-  html body header.global-header .brand-lockup b {
-    font-size: 1.85rem;
-  }
-  html body header.global-header .brand-lockup small {
-    font-size: 0.66rem;
-  }
+
   html body header.global-header nav {
     gap: 2px;
   }
+
   html body header.global-header nav a {
-    padding: 11px 13px;
-    gap: 7px;
-    font-size: 0.92rem;
-  }
-  html body header.global-header .header-cta {
-    padding: 11px 22px;
+    padding: 10px 12px;
+    font-size: 0.89rem;
   }
 }
 
-/* =========================================================
-   Tablet e telemóvel (≤1240px): hambúrguer + painel flutuante
-   ========================================================= */
-@media (max-width: 1240px) {
+/* Larguras intermédias
+   A partir daqui o menu passa para hambúrguer antes de começar a quebrar. */
+
+@media (max-width: 1500px) {
   html body header.global-header {
     --hd-h: 84px;
+
     gap: 12px;
   }
+
+  html body header.global-header .brand-lockup {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    gap: 12px;
+  }
+
   html body header.global-header .brand-lockup img {
     height: 56px;
     max-width: 76px;
   }
+
   html body header.global-header .brand-lockup b {
     font-size: 1.7rem;
   }
+
   html body header.global-header .brand-lockup small {
-    font-size: 0.7rem;
-  }
-  html body header.global-header .header-tools {
-    margin-left: auto;
-  }
-  html body header.global-header .menu-toggle {
-    display: grid !important;
-  }
-  html body header.global-header .menu-toggle[aria-label^="Fechar"] {
-    background: var(--hd-grad);
-    border-color: transparent;
-    color: #fff;
+    font-size: 0.68rem;
   }
 
-  /* Fechado: totalmente escondido */
+  html body header.global-header .header-tools {
+    margin-left: auto;
+    flex: none;
+  }
+
+  /* Esconde a navegação horizontal */
+
   html body header.global-header nav {
     display: none !important;
   }
 
-  /* Aberto: cartão flutuante, com fundo sólido */
+  /* Mostra o botão hambúrguer */
+
+  html body header.global-header .menu-toggle {
+    display: grid !important;
+  }
+
+  html body header.global-header .menu-toggle[aria-label^="Fechar"] {
+    background: var(--hd-grad);
+
+    border-color: transparent;
+
+    color: #fff;
+  }
+
+  /* Menu aberto */
+
   html body header.global-header nav.mobile-open {
     display: flex !important;
+
     position: absolute !important;
+
     top: calc(100% + 10px) !important;
+
     left: auto !important;
     right: var(--hd-pad-r) !important;
+
     bottom: auto !important;
+
     width: min(380px, calc(100vw - 24px)) !important;
+
     height: auto !important;
+
     max-height: calc(100vh - var(--hd-h) - 24px) !important;
+
     max-height: calc(100dvh - var(--hd-h) - 24px) !important;
+
     flex-direction: column !important;
+
     align-items: stretch !important;
     justify-content: flex-start !important;
+
     gap: 6px;
+
     margin: 0 !important;
     padding: 12px !important;
+
     text-align: left;
+
     overflow-y: auto !important;
+
     overscroll-behavior: contain;
+
     -webkit-overflow-scrolling: touch;
+
     background: var(--hd-bg1) !important;
+
     border: 1.5px solid var(--hd-line) !important;
+
     border-radius: 24px !important;
+
     box-shadow:
       0 24px 50px rgba(8, 50, 80, 0.22),
       0 4px 12px rgba(8, 50, 80, 0.1) !important;
+
     transform: none !important;
+
     opacity: 1 !important;
     visibility: visible !important;
+
     animation: hd-fade 0.18s ease-out;
   }
 
   html body header.global-header nav.mobile-open a {
     display: flex;
+
     align-items: center;
+
     gap: 14px;
+
     width: 100%;
+
     min-height: 54px;
+
     padding: 8px 14px 8px 8px;
+
     border-radius: 16px;
+
     font-size: 1.04rem;
+
     font-weight: 600;
+
     color: var(--hd-ink);
+
     background: transparent;
+
     box-shadow: none;
   }
+
   html body header.global-header nav.mobile-open a svg {
     flex: none;
+
     width: 38px !important;
     height: 38px !important;
+
     padding: 8px;
+
     border-radius: 12px;
+
     background: var(--hd-pill);
+
     color: var(--hd-blue);
   }
+
   html body header.global-header nav.mobile-open a::after {
     content: "";
+
     flex: none;
+
     margin-left: auto;
+
     width: 8px;
     height: 8px;
+
     border-top: 2px solid currentColor;
+
     border-right: 2px solid currentColor;
+
     transform: rotate(45deg);
+
     opacity: 0.45;
   }
+
   html body header.global-header nav.mobile-open a.active {
     background: var(--hd-grad);
+
     color: #fff !important;
+
     box-shadow: 0 8px 18px rgba(10, 106, 168, 0.28);
   }
+
   html body header.global-header nav.mobile-open a.active svg {
     background: rgba(255, 255, 255, 0.22);
+
     color: #fff;
   }
+
   html body header.global-header nav.mobile-open a.active::after {
     opacity: 0.9;
   }
+
   @media (hover: hover) {
     html body header.global-header nav.mobile-open a:hover:not(.active) {
       background: var(--hd-pill);
     }
   }
 
-  /* Bloqueia o scroll da página enquanto o menu está aberto */
+  /* Bloqueia o scroll enquanto o menu estiver aberto */
+
   body:has(header.global-header nav.mobile-open) {
     overflow: hidden;
   }
 }
 
+/* Animação do menu */
+
 @keyframes hd-fade {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
-/* =========================================================
-   Telemóveis (≤560px): cartão ocupa a largura toda
-   ========================================================= */
+/* Telemóveis */
+
 @media (max-width: 560px) {
   html body header.global-header {
     --hd-h: 72px;
+
     --hd-pad-l: max(14px, env(safe-area-inset-left, 0px));
+
     --hd-pad-r: max(14px, env(safe-area-inset-right, 0px));
+
     gap: 8px;
   }
+
   html body header.global-header .brand-lockup {
     gap: 10px;
+
+    min-width: 0;
   }
+
   html body header.global-header .brand-lockup img {
     height: 46px;
     max-width: 64px;
   }
+
   html body header.global-header .brand-lockup b {
     font-size: 1.35rem;
   }
+
   html body header.global-header .brand-lockup small {
     font-size: 0.56rem;
+
     white-space: normal;
+
     max-width: 150px;
   }
+
   html body header.global-header .header-tools {
     gap: 8px;
   }
+
   html body header.global-header .icon-button,
   html body header.global-header .menu-toggle {
     width: 40px;
     height: 40px;
   }
+
   html body header.global-header .header-cta {
     padding: 9px 16px;
+
     font-size: 0.9rem;
+
     gap: 6px;
   }
 
   html body header.global-header nav.mobile-open {
     left: 12px !important;
+
     right: 12px !important;
+
     width: auto !important;
+
     top: calc(100% + 8px) !important;
+
     border-radius: 22px !important;
   }
 }
 
-/* Muito estreito (≤400px): "Entrar" só com ícone, sem slogan */
+/* Telemóveis muito estreitos */
+
 @media (max-width: 400px) {
   html body header.global-header .header-cta {
     font-size: 0;
+
     gap: 0;
+
     width: 40px;
     height: 40px;
+
     padding: 0;
   }
+
   html body header.global-header .brand-lockup small {
     display: none;
   }
 }
 
-/* Mínimo (≤340px) */
+/* Telemóveis mínimos */
+
 @media (max-width: 340px) {
   html body header.global-header {
     --hd-pad-l: max(10px, env(safe-area-inset-left, 0px));
+
     --hd-pad-r: max(10px, env(safe-area-inset-right, 0px));
+
     gap: 6px;
   }
+
   html body header.global-header .brand-lockup {
     gap: 8px;
   }
+
   html body header.global-header .brand-lockup img {
     height: 38px;
     max-width: 52px;
   }
+
   html body header.global-header .brand-lockup b {
     font-size: 1.1rem;
+
     letter-spacing: 0;
   }
+
   html body header.global-header .header-tools {
     gap: 6px;
   }
+
   html body header.global-header .icon-button,
   html body header.global-header .menu-toggle,
   html body header.global-header .header-cta {
     width: 36px;
     height: 36px;
   }
+
   html body header.global-header nav.mobile-open {
     left: 8px !important;
+
     right: 8px !important;
   }
 }
 
-/* Telemóvel na horizontal (pouca altura) */
-@media (max-height: 480px) and (orientation: landscape) and (max-width: 1240px) {
+/* Telemóvel em horizontal com pouca altura */
+
+@media (max-height: 480px) and (orientation: landscape) and (max-width: 1500px) {
   html body header.global-header {
     --hd-h: 56px;
+
     padding-top: calc(6px + env(safe-area-inset-top, 0px));
+
     padding-bottom: 6px;
   }
+
   html body header.global-header .brand-lockup img {
     height: 40px;
   }
+
   html body header.global-header .brand-lockup b {
     font-size: 1.3rem;
   }
+
   html body header.global-header .brand-lockup small {
     display: none;
   }
+
   html body header.global-header nav.mobile-open a {
     min-height: 46px;
   }
 }
 
+/* Redução de movimento */
+
 @media (prefers-reduced-motion: reduce) {
   html body header.global-header nav.mobile-open {
     animation: none;
   }
+
   html body header.global-header nav a {
     transition: none;
   }

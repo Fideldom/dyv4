@@ -3566,3 +3566,181 @@ button {
     width: 100%;
   }
 }
+
+/* Hero da página inicial com a imagem de fundo (homee.jpg). */
+
+/* A cor de base é a mesma do azul da imagem, para os dois se fundirem sem emenda */
+.hero-banner {
+  background-color: #013a70;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  min-height: max(34vw, 520px);
+}
+
+/* Remove os brilhos antigos do hero, a imagem já traz os seus */
+.hero-banner::before,
+.hero-banner::after {
+  display: none;
+}
+
+/* Uma só coluna: os dizeres ficam à esquerda e o logótipo da imagem à direita */
+.hero-banner .hero-new-inner {
+  grid-template-columns: 1fr;
+  position: relative;
+  z-index: 1;
+}
+.hero-banner .hero-new-copy {
+  max-width: min(520px, 100%);
+}
+.hero-banner h1 {
+  font-size: clamp(30px, 3.6vw, 52px);
+}
+
+/* Texto de apoio e etiquetas por baixo do título */
+.hero-banner-lead p {
+  max-width: 480px;
+  margin: 20px 0 26px;
+  color: #c3d2e8;
+  font-size: clamp(14.5px, 1.3vw, 16.5px);
+  line-height: 1.6;
+}
+.hero-banner .hero-chip-row {
+  margin-top: 26px;
+}
+
+/* A imagem ocupa a largura toda, encostada ao fundo do hero, sem ser ampliada.
+   Assim o logótipo fica sempre à direita e nunca passa por baixo do texto. */
+.hero-banner-art {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  aspect-ratio: 1600 / 533;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% 100%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%);
+}
+
+/* Sombra suave à esquerda para o texto ficar sempre legível */
+.hero-banner-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(1, 30, 66, 0.55) 0%,
+    rgba(1, 30, 66, 0.25) 40%,
+    transparent 58%
+  );
+}
+
+/* Tablet e telemóvel: o texto vem primeiro e a imagem aparece por baixo, em tamanho legível */
+@media (max-width: 900px) {
+  .hero-banner {
+    min-height: 0;
+    justify-content: flex-start;
+  }
+  .hero-banner .hero-new-inner {
+    padding-bottom: 28px;
+  }
+  .hero-banner-art {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    z-index: 0;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: 80% center;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  /* Funde o topo da imagem com o azul do texto que está acima */
+  .hero-banner-art::after {
+    background: linear-gradient(180deg, #013a70 0%, transparent 30%);
+  }
+}
+
+/* Telemóveis: imagem mais alta para o logótipo aparecer maior */
+@media (max-width: 560px) {
+  .hero-banner-art {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Título principal: Facturação Electrónica */
+.hero-banner h1 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 68px);
+  line-height: 1.08;
+}
+
+/* Frase por baixo do título */
+.hero-banner-lead p {
+  margin: 14px 0 26px;
+  max-width: 420px;
+  font-size: clamp(15px, 1.5vw, 19px);
+  line-height: 1.5;
+}
+
+/* Página AGT */
+
+/* A cor de base é a mesma do azul escuro da imagem, para se fundirem sem emenda */
+.agt-hero {
+  background-color: #01183d;
+}
+
+/* Os dizeres ocupam a metade esquerda e nunca chegam ao monitor nem à engrenagem */
+.agt-hero .hero-new-copy {
+  max-width: min(660px, 50vw);
+}
+
+/* Título grande, como na imagem original */
+.agt-hero h1 {
+  max-width: none;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(30px, 4vw, 58px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+/* Texto explicativo */
+.agt-lead p {
+  max-width: none;
+  margin: clamp(14px, 1.8vw, 22px) 0 0;
+  color: #fff;
+  font-size: clamp(14.5px, 1.75vw, 24px);
+  line-height: 1.5;
+}
+
+/* A imagem já é escura à esquerda, por isso não precisa da sombra extra */
+.agt-hero .hero-banner-art::after {
+  display: none;
+}
+
+/* Tablet e telemóvel: o texto ocupa a largura toda e a imagem aparece por baixo,
+   encostada à direita para mostrar sempre o monitor e o selo AGT */
+@media (max-width: 900px) {
+  .agt-hero .hero-new-copy {
+    max-width: 100%;
+  }
+  .agt-hero .hero-banner-art {
+    background-position: 100% center;
+  }
+  .agt-hero .hero-banner-art::after {
+    display: block;
+    background: linear-gradient(180deg, #01183d 0%, transparent 30%);
+  }
+}
+
+/* Telemóveis pequenos */
+@media (max-width: 420px) {
+  .agt-hero h1 {
+    font-size: clamp(28px, 9vw, 34px);
+  }
+}

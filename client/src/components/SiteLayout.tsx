@@ -9,7 +9,7 @@ import {
   Home,
   LogIn,
   Menu,
-  Check,
+  ReceiptText,
   Moon,
   Settings,
   Sun,
@@ -33,7 +33,7 @@ const logo = "/media/IMG-20260831-WA0000.jpg";
 const nav = [
   ["Início", "/", "home"],
   ["Software", "/software", "software"],
-  ["AGT", "/agt", "agt"],
+  ["Facturação Electrónica", "/agt", "agt"],
   ["Serviços", "/servicos", "services"],
   ["Parceiros", "/parceiros", "partners"],
   ["Certificações", "/certificacoes", "certifications"],
@@ -42,7 +42,7 @@ const nav = [
 const navIcons = {
   home: Home,
   software: Grid3X3,
-  agt: Check,
+  agt: ReceiptText,
   services: Settings,
   partners: Handshake,
   certifications: Award,
@@ -71,9 +71,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="app-shell">
-      <header
-        className="global-header header-solid"
-      >
+      <header className="global-header header-solid">
         <Link href="/" className="brand-lockup" onClick={close}>
           <img src={logo} alt="DYLANDE" />
           <span>
@@ -88,8 +86,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         >
           {nav.map(([label, href, icon]) => {
             const Icon = navIcons[icon];
-            const active =
-              href === "/" ? location === "/" : location === href;
+            const active = href === "/" ? location === "/" : location === href;
 
             return (
               <Link
