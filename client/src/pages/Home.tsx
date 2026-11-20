@@ -124,27 +124,26 @@ const heroSlides: HeroSlideItem[] = [
     renderLead: () => <p>Tecnologia Dylande Soft em conformidade com AGT</p>,
   },
   {
-    id: "home3",
-    image: `${media}home3.jpeg`,
+    id: "home4",
+    image: `${media}home4.jpeg`,
     ariaLabel: "Software prático e simples Dylande",
     renderTitle: () => (
       <h1 className="hero-title-home3">
-        <span className="hero-title-black">Software</span>
+        <span>Faturação Eletrónica</span>
         <br />
-        <span className="hero-title-blue">prático e simples</span>
+        <span>é com o Dylande Soft</span>
       </h1>
     ),
     renderLead: () => (
       <p className="hero-lead-home3">
-        Gerencie o seu negócio de forma
         <br />
-        <strong>fácil, rápida e segura</strong>
+        <strong></strong>
       </p>
     ),
   },
   {
-    id: "home4",
-    image: `${media}home4.jpeg`,
+    id: "home3",
+    image: `${media}home3.jpeg`,
     ariaLabel: "Facturação Electrónica é com o Dylande Soft",
     showHighlights: true,
     renderTitle: () => (
@@ -182,7 +181,9 @@ export default function Home() {
   return (
     <div className="home-page">
       {/* Hero: a imagem fica no fundo (hero-banner-art) e os dizeres à esquerda */}
-      <section className="hero-new hero-banner">
+      <section
+        className={`hero-new hero-banner${currentSlide.id === "home3" ? " is-slide-home3" : ""}`}
+      >
         <div className="container hero-new-inner">
           <div className="hero-new-copy">
             <Reveal

@@ -3761,7 +3761,7 @@ button {
 }
 
 .hero-new-copy > .hero-banner-lead p.hero-lead-home3 {
-  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  font-size: clamp(0.68rem, 1vw, 1.1rem);
   line-height: 1.55;
 }
 
@@ -3821,5 +3821,23 @@ button {
 @media (max-width: 559px) {
   .hero-home4-highlights {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tamanho médio equilibrado para Faturação Eletrónica / é com o Dylande Soft */
+.hero-new .hero-title-home3 {
+  font-size: clamp(2rem, 3.4vw, 2.85rem);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+/* Deslocamento suave para a esquerda no slide home3 sem quebrar o layout */
+.hero-new.is-slide-home3 .hero-new-copy {
+  margin-left: clamp(-24px, -2.5vw, -8px);
+}
+
+@media (max-width: 1024px) {
+  .hero-new.is-slide-home3 .hero-new-copy {
+    margin-left: 0;
   }
 }
