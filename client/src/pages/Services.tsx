@@ -78,14 +78,14 @@ export default function Services() {
       </Reveal>
       <section className="container method-band">     
         <Reveal>
-            <video autoPlay
+            {/* <video autoPlay
               muted
               loop
               playsInline
               controls
               poster={`${m}IMG-20260901-WA0008.jpg`}>
             <source src={`${m}VID-20260905-WA0036 (1).mp4`} type="video/mp4" />
-          </video>
+          </video> */}
           {/* <span className="eyebrow">Como trabalhamos</span> */}
           <h2>Menos saltos no escuro. Mais decisões com contexto.</h2>
         </Reveal>

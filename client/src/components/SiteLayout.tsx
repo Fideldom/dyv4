@@ -9,6 +9,7 @@ import {
   Home,
   LogIn,
   Menu,
+  Check,
   Moon,
   Settings,
   Sun,
@@ -32,6 +33,7 @@ const logo = "/media/IMG-20260831-WA0000.jpg";
 const nav = [
   ["Início", "/", "home"],
   ["Software", "/software", "software"],
+  ["AGT", "/agt", "agt"],
   ["Serviços", "/servicos", "services"],
   ["Parceiros", "/parceiros", "partners"],
   ["Certificações", "/certificacoes", "certifications"],
@@ -40,6 +42,7 @@ const nav = [
 const navIcons = {
   home: Home,
   software: Grid3X3,
+  agt: Check,
   services: Settings,
   partners: Handshake,
   certifications: Award,

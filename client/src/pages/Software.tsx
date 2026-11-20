@@ -183,28 +183,6 @@ export default function Software() {
       <br />
       <br />
 
-      <section className="container product-video">
-        <Reveal delay={0}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-            poster={`${m}IMG-20260901-WA0008.jpg`}
-          >
-            <source src={`${m}VID-20260901-WA0007.mp4`} type="video/mp4" />
-          </video>
-        </Reveal>
-        <Reveal delay={0.1}>
-          {/* <span className="eyebrow">Ver em contexto</span> */}
-          <h2>Facilitar e dinamizar o seu trabalho no dia a dia.</h2>
-          <p>
-            Veja como o ecossistema visualiza a operação e depois fale connosco
-            sobre a sua realidade.
-          </p>
-        </Reveal>
-      </section>
     </div>
   );
 }
