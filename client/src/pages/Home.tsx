@@ -2,16 +2,18 @@
   DYLANDE — Navy Precision / Corporate Rebuild
   Homepage orientada a decisão: clareza de oferta, produto visível e confiança comprovável.
  */
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  Clock,
   Headphones,
+  MonitorSmartphone,
   Percent,
   Play,
   ShieldCheck,
-  Sparkles,
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
@@ -21,6 +23,7 @@ import { siteConfig } from "@/lib/siteConfig";
 import { trackEvent } from "@/lib/analytics";
 
 const media = "/media/";
+const HERO_INTERVAL_MS = 4500;
 
 const resellerBenefits: Array<[LucideIcon, string, string, string, string]> = [
   [
@@ -92,21 +95,127 @@ const resellerPlans = [
   },
 ];
 
+const home4Highlights: Array<[LucideIcon, string]> = [
+  [Clock, "A qualquer momento"],
+  [MonitorSmartphone, "Em qualquer dispositivo"],
+  [ShieldCheck, "Mais segurança"],
+  [TrendingUp, "Mais eficiência"],
+];
+
+interface HeroSlideItem {
+  id: string;
+  image: string;
+  ariaLabel: string;
+  renderTitle: () => React.ReactNode;
+  renderLead: () => React.ReactNode;
+  showHighlights?: boolean;
+}
+
+const heroSlides: HeroSlideItem[] = [
+  {
+    id: "home2",
+    image: `${media}home2.jpeg`,
+    ariaLabel: "DYLANDE Software e certificação AGT",
+    renderTitle: () => (
+      <h1>
+        Facturação <em>Electrónica</em>
+      </h1>
+    ),
+    renderLead: () => <p>Tecnologia Dylande Soft em conformidade com AGT</p>,
+  },
+  {
+    id: "home3",
+    image: `${media}home3.jpeg`,
+    ariaLabel: "Software prático e simples Dylande",
+    renderTitle: () => (
+      <h1 className="hero-title-home3">
+        <span className="hero-title-black">Software</span>
+        <br />
+        <span className="hero-title-blue">prático e simples</span>
+      </h1>
+    ),
+    renderLead: () => (
+      <p className="hero-lead-home3">
+        Gerencie o seu negócio de forma
+        <br />
+        <strong>fácil, rápida e segura</strong>
+      </p>
+    ),
+  },
+  {
+    id: "home4",
+    image: `${media}home4.jpeg`,
+    ariaLabel: "Facturação Electrónica é com o Dylande Soft",
+    showHighlights: true,
+    renderTitle: () => (
+      <h1 className="hero-title-home4">
+        <span className="hero-title-black">software</span>
+        <br />
+        <span className="hero-title-blue">prático e</span>
+        <br />
+        <span className="hero-title-blue">simples</span>
+      </h1>
+    ),
+    renderLead: () => (
+      <p className="hero-lead-home4">
+        Gerencie o seu negócio de forma
+        <br />
+        <strong>fácil, rápida e segura.</strong>
+      </p>
+    ),
+  },
+];
+
 export default function Home() {
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setSlideIndex((current) => (current + 1) % heroSlides.length);
+    }, HERO_INTERVAL_MS);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const currentSlide = heroSlides[slideIndex];
+
   return (
     <div className="home-page">
       {/* Hero: a imagem fica no fundo (hero-banner-art) e os dizeres à esquerda */}
       <section className="hero-new hero-banner">
         <div className="container hero-new-inner">
           <div className="hero-new-copy">
-            <Reveal delay={0.1} trigger="mount">
-              <h1>
-                Facturação <em>Electrónica</em>
-              </h1>
+            <Reveal
+              key={`title-${currentSlide.id}`}
+              delay={0.1}
+              trigger="mount"
+            >
+              {currentSlide.renderTitle()}
             </Reveal>
-            <Reveal delay={0.3} trigger="mount" className="hero-banner-lead">
-              <p>Tecnologia Dylande Soft em conformidade com AGT</p>
+            <Reveal
+              key={`lead-${currentSlide.id}`}
+              delay={0.3}
+              trigger="mount"
+              className="hero-banner-lead"
+            >
+              {currentSlide.renderLead()}
             </Reveal>
+            {currentSlide.showHighlights && (
+              <Reveal
+                key={`highlights-${currentSlide.id}`}
+                delay={0.38}
+                trigger="mount"
+              >
+                <div className="hero-home4-highlights">
+                  {home4Highlights.map(([Icon, label]) => (
+                    <div className="hero-home4-highlight" key={label}>
+                      <Icon size={22} strokeWidth={1.9} />
+                      <span>{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            )}
             <Reveal delay={0.45} trigger="mount" className="hero-new-actions">
               <Magnetic>
                 <Link href="/software" className="button button-primary">
@@ -124,8 +233,8 @@ export default function Home() {
         <div
           className="hero-banner-art"
           role="img"
-          aria-label="DYLANDE Software e certificação AGT"
-          style={{ backgroundImage: `url(${media}homee.jpg)` }}
+          aria-label={currentSlide.ariaLabel}
+          style={{ backgroundImage: `url("${encodeURI(currentSlide.image)}")` }}
         />
       </section>
       <section className="section-new intro-split">

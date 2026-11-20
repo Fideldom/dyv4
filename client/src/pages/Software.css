@@ -18,7 +18,12 @@
   overflow-x: clip;
   background: var(--sw-bg);
   color: var(--sw-ink);
-  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
   padding: clamp(24px, 4vw, 36px) 0 clamp(36px, 6vw, 56px);
   -webkit-text-size-adjust: 100%;
 }
@@ -56,7 +61,11 @@
   top: 40px;
   width: clamp(240px, 36vw, 520px);
   height: clamp(300px, 43vw, 620px);
-  background: linear-gradient(160deg, rgba(53, 198, 214, 0.35), rgba(53, 198, 214, 0.05));
+  background: linear-gradient(
+    160deg,
+    rgba(53, 198, 214, 0.35),
+    rgba(53, 198, 214, 0.05)
+  );
   transform: rotate(-20deg);
 }
 .sw-page::after {
@@ -64,7 +73,11 @@
   bottom: calc(-1 * clamp(90px, 14vw, 200px));
   width: clamp(200px, 29vw, 420px);
   height: clamp(200px, 29vw, 420px);
-  background: linear-gradient(20deg, rgba(23, 162, 184, 0.4), rgba(23, 162, 184, 0.05));
+  background: linear-gradient(
+    20deg,
+    rgba(23, 162, 184, 0.4),
+    rgba(23, 162, 184, 0.05)
+  );
 }
 
 .sw-container {
@@ -123,7 +136,8 @@
   grid-template-areas: "num sep body media";
   align-items: center;
   column-gap: var(--sw-gap);
-  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.4vw, 30px) clamp(18px, 2vw, 24px) clamp(20px, 2.6vw, 36px);
+  padding: clamp(18px, 2vw, 24px) clamp(18px, 2.4vw, 30px)
+    clamp(18px, 2vw, 24px) clamp(20px, 2.6vw, 36px);
   background: var(--sw-card);
   border: 1.5px solid var(--sw-card-b);
   border-radius: clamp(22px, 2.6vw, 30px);
@@ -250,22 +264,26 @@
   gap: 12px; /* Espaço entre a imagem e o botão */
   width: clamp(150px, 18vw, 230px);
   /* Aumentamos um pouco a altura máxima/clamp para acomodar o botão sem esmagar a imagem */
-  height: auto; 
+  height: auto;
   min-height: clamp(110px, 15vw, 190px);
   margin-right: clamp(0px, 2vw, 24px);
   background: none;
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  overflow: visible;  
+  overflow: visible;
 }
 
 .sw-media img {
   display: block;
   width: 100%;
-  height: clamp(100px, 12vw, 150px); /* Controla a altura da imagem mantendo flexibilidade */
+  height: clamp(
+    100px,
+    12vw,
+    150px
+  ); /* Controla a altura da imagem mantendo flexibilidade */
   max-width: 100%;
-  object-fit: contain;      /* mostra a imagem INTEIRA, sem cortar */
+  object-fit: contain; /* mostra a imagem INTEIRA, sem cortar */
   object-position: center;
   mix-blend-mode: multiply; /* funde fundos brancos com o cartão claro */
   transition: transform 0.4s ease;
@@ -372,5 +390,62 @@
   }
   .sw-card:hover .sw-media img {
     transform: none;
+  }
+}
+
+/* Detalhes expansíveis de cada software e botão de baixar */
+.sw-details {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sw-card-b);
+}
+
+.sw-details h3 {
+  margin: 0 0 12px;
+  font-size: clamp(0.98rem, 1.8vw, 1.12rem);
+  font-weight: 600;
+  color: var(--sw-ink);
+}
+
+.sw-features-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+.sw-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: clamp(0.86rem, 1.5vw, 0.94rem);
+  line-height: 1.4;
+  color: var(--sw-ink2);
+}
+
+.sw-features-list li svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--sw-blue);
+}
+
+.sw-details-footer {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 759px) {
+  .sw-features-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 419px) {
+  .sw-details-footer .sw-more {
+    width: 100%;
   }
 }

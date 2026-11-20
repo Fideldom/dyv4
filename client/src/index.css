@@ -3744,3 +3744,82 @@ button {
     font-size: clamp(28px, 9vw, 34px);
   }
 }
+
+/* Estilos do slide home3 no Hero da Home */
+.hero-new .hero-title-home3 {
+  font-size: clamp(3rem, 6.2vw, 4.75rem);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.hero-new .hero-title-home3 .hero-title-black {
+  color: #0b1320;
+}
+
+.hero-new .hero-title-home3 .hero-title-blue {
+  color: var(--blue-2);
+}
+
+.hero-new-copy > .hero-banner-lead p.hero-lead-home3 {
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  line-height: 1.55;
+}
+
+.hero-new-copy > .hero-banner-lead p.hero-lead-home3 strong {
+  font-weight: 700;
+}
+
+/* Estilos do slide home4 no Hero da Home */
+.hero-new .hero-title-home4 {
+  font-size: clamp(2.8rem, 5.4vw, 4.25rem);
+  line-height: 1.02;
+  font-weight: 800;
+  text-transform: lowercase;
+}
+
+.hero-new .hero-title-home4 .hero-title-black {
+  color: #0b1320;
+}
+
+.hero-new .hero-title-home4 .hero-title-blue {
+  color: var(--blue-2);
+}
+
+.hero-new-copy > .hero-banner-lead p.hero-lead-home4 {
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.hero-new-copy > .hero-banner-lead p.hero-lead-home4 strong {
+  font-weight: 700;
+}
+
+.hero-home4-highlights {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+  max-width: 560px;
+}
+
+.hero-home4-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--blue-2);
+  font-size: 0.78rem;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+.hero-home4-highlight span {
+  color: #dce6f5;
+}
+
+@media (max-width: 559px) {
+  .hero-home4-highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
