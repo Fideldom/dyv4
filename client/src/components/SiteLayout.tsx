@@ -57,6 +57,11 @@ function resolvePathname(raw: unknown): string {
   return "/";
 }
 
+function isNavActive(href: string, location: string): boolean {
+  if (href === "/") return location === "/";
+  return location === href || location.startsWith(`${href}/`);
+}
+
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [rawLocation] = useLocation();
   const location = resolvePathname(rawLocation);
@@ -69,67 +74,110 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     setOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1500) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      document.body.classList.remove("header-menu-open");
+      return;
+    }
+
+    document.body.classList.add("header-menu-open");
+    return () => document.body.classList.remove("header-menu-open");
+  }, [open]);
+
   return (
     <div className="app-shell">
-      <header className="global-header header-solid">
-        <Link href="/" className="brand-lockup" onClick={close}>
-          <img src={logo} alt="DYLANDE" />
-          <span>
-            <b>DYLANDE</b>
-            <small>Prestação de Serviços e Comércio Geral</small>
-          </span>
-        </Link>
-
-        <nav
-          className={open ? "mobile-open" : ""}
-          aria-label="Navegação principal"
-        >
-          {nav.map(([label, href, icon]) => {
-            const Icon = navIcons[icon];
-            const active = href === "/" ? location === "/" : location === href;
-
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={active ? "active" : ""}
-                aria-current={active ? "page" : undefined}
-                onClick={close}
-              >
-                <Icon size={22} />
-                <span>{label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="header-tools">
-          <button
-            type="button"
-            className="icon-button"
-            aria-label={
-              theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"
-            }
-            onClick={() => toggleTheme?.()}
+      <header
+        className={`global-header ${location !== "/" ? "header-solid" : ""} ${open ? "header-open" : ""}`}
+      >
+        <div className="header-inner">
+          <Link
+            href="/"
+            className="brand-lockup"
+            onClick={close}
+            aria-label="DYLANDE — Página inicial"
           >
-            {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
-          </button>
-
-          <Link href="/login" className="header-cta" onClick={close}>
-            <LogIn size={20} />
-            Entrar
+            <img src={logo} alt="DYLANDE" />
+            <span className="brand-text">
+              <b>DYLANDE</b>
+              <small>Prestação de Serviços e Comércio Geral</small>
+            </span>
           </Link>
 
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-label={open ? "Fechar menu" : "Abrir menu"}
-            onClick={() => setOpen((prev) => !prev)}
+          <nav
+            className={`global-nav ${open ? "mobile-open" : ""}`}
+            aria-label="Navegação principal"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            <div className="nav-list">
+              {nav.map(([label, href, icon]) => {
+                const Icon = navIcons[icon];
+                const active = isNavActive(href, location);
+
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={active ? "active" : ""}
+                    aria-current={active ? "page" : undefined}
+                    onClick={close}
+                  >
+                    <Icon size={18} strokeWidth={2} />
+                    <span>{label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+
+          <div className="header-tools">
+            <button
+              type="button"
+              className="icon-button"
+              aria-label={
+                theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"
+              }
+              title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+              onClick={() => toggleTheme?.()}
+            >
+              {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
+
+            <Link href="/login" className="header-cta" onClick={close}>
+              <LogIn size={18} />
+              <span>Entrar</span>
+            </Link>
+
+            <button
+              type="button"
+              className="menu-toggle"
+              aria-label={open ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((prev) => !prev)}
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </header>
+
+      {open && (
+        <button
+          type="button"
+          className="header-overlay"
+          aria-label="Fechar menu"
+          onClick={close}
+        />
+      )}
 
       <main className="main-content">
         <PageTransition location={location}>{children}</PageTransition>
@@ -266,24 +314,18 @@ export const Layout = SiteLayout;
 export default SiteLayout;
 
 export function PageIntro({
-  // kicker,
   title,
   text,
   variant = "mask",
 }: {
-  // kicker: string;
+  kicker?: string;
   title: string;
   text: string;
   variant?: MotionTitleVariant;
 }) {
   return (
     <div className="page-intro">
-      <MotionHeroTitle
-        as="h1"
-        // eyebrow={kicker}
-        title={title}
-        variant={variant}
-      />
+      <MotionHeroTitle as="h1" title={title} variant={variant} />
       <Reveal delay={0.15} trigger="mount">
         <p>{text}</p>
       </Reveal>

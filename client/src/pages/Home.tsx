@@ -2,12 +2,14 @@
   DYLANDE — Navy Precision / Corporate Rebuild
   Homepage orientada a decisão: clareza de oferta, produto visível e confiança comprovável.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   Headphones,
   MonitorSmartphone,
@@ -106,8 +108,8 @@ interface HeroSlideItem {
   id: string;
   image: string;
   ariaLabel: string;
-  renderTitle: () => React.ReactNode;
-  renderLead: () => React.ReactNode;
+  renderTitle: () => ReactNode;
+  renderLead: () => ReactNode;
   showHighlights?: boolean;
 }
 
@@ -168,13 +170,23 @@ const heroSlides: HeroSlideItem[] = [
 export default function Home() {
   const [slideIndex, setSlideIndex] = useState(0);
 
+  const goToPreviousSlide = () => {
+    setSlideIndex((current) =>
+      current === 0 ? heroSlides.length - 1 : current - 1,
+    );
+  };
+
+  const goToNextSlide = () => {
+    setSlideIndex((current) => (current + 1) % heroSlides.length);
+  };
+
   useEffect(() => {
     const interval = window.setInterval(() => {
       setSlideIndex((current) => (current + 1) % heroSlides.length);
     }, HERO_INTERVAL_MS);
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [slideIndex]);
 
   const currentSlide = heroSlides[slideIndex];
 
@@ -184,6 +196,24 @@ export default function Home() {
       <section
         className={`hero-new hero-banner${currentSlide.id === "home3" ? " is-slide-home3" : ""}`}
       >
+        <button
+          type="button"
+          className="hero-arrow hero-arrow-prev"
+          aria-label="Slide anterior"
+          onClick={goToPreviousSlide}
+        >
+          <ChevronLeft size={26} strokeWidth={2} />
+        </button>
+
+        <button
+          type="button"
+          className="hero-arrow hero-arrow-next"
+          aria-label="Próximo slide"
+          onClick={goToNextSlide}
+        >
+          <ChevronRight size={26} strokeWidth={2} />
+        </button>
+
         <div className="container hero-new-inner">
           <div className="hero-new-copy">
             <Reveal
