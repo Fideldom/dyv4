@@ -1,12 +1,65 @@
-/* DYLANDE — Navy Precision / Corporate Rebuild
-   Cabeçalho global com três cápsulas azul-marinho (marca, navegação e ferramentas).
-   Responsivo:
-   - Desktop grande (acima de 1500px): navegação completa
-   - Notebook, tablet e telemóvel (1500px ou menos): menu hambúrguer
-   Importado pelo SiteLayout.tsx, depois do CSS global. */
+/* ==========================================================
+   DYLANDE — GLOBAL HEADER & FOOTER (RESPONSIVIDADE PURA)
+   Cobre:
+   - Ultra-pequenos / Wearables / Fold fechado (280px - 359px)
+   - Mobile pequeno e médio (360px - 480px)
+   - Mobile grande / Phablet (481px - 640px)
+   - Tablet retrato e paisagem (641px - 1024px)
+   - Laptop / Desktop compacto (1025px - 1279px)
+   - Desktop padrão e grande (1280px - 1919px)
+   - Ultrawide / 2K / 4K (1920px+)
+   - Landscape com pouca altura (max-height: 520px)
+   - Safe Areas (notch / dynamic island) + Dark/Light Mode
+========================================================== */
+
+:root {
+  --hd-height: clamp(62px, 5.8vw, 84px);
+
+  --hd-bg: rgba(255, 255, 255, 0.96);
+  --hd-surface: #ffffff;
+  --hd-surface-hover: #f1f6fa;
+
+  --hd-line: rgba(11, 95, 149, 0.12);
+
+  --hd-ink: #0b2a4a;
+  --hd-ink-soft: #4a6073;
+
+  --hd-blue: #0b5f95;
+  --hd-blue-dark: #08466f;
+  --hd-teal: #1598ad;
+
+  --hd-pill: #e7f2f8;
+  --hd-gradient: linear-gradient(135deg, #0b5f95 0%, #0873a5 48%, #16a3b3 100%);
+
+  --hd-shadow: 0 4px 20px rgba(7, 47, 74, 0.055);
+  --hd-menu-shadow: 0 20px 50px rgba(4, 37, 59, 0.16);
+
+  --hd-transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --hd-container: min(calc(100% - clamp(16px, 3.5vw, 56px)), 1540px);
+}
+
+.dark {
+  --hd-bg: rgba(9, 19, 39, 0.95);
+  --hd-surface: #11203d;
+  --hd-surface-hover: #182b50;
+
+  --hd-line: rgba(125, 211, 252, 0.14);
+
+  --hd-ink: #edf2fa;
+  --hd-ink-soft: #9fb0ca;
+
+  --hd-blue: #38bdf8;
+  --hd-blue-dark: #7dd3fc;
+  --hd-teal: #2dd4bf;
+
+  --hd-pill: rgba(20, 121, 201, 0.24);
+
+  --hd-shadow: 0 8px 26px rgba(2, 6, 23, 0.45);
+  --hd-menu-shadow: 0 24px 60px rgba(2, 6, 23, 0.72);
+}
 
 html {
-  scroll-padding-top: 110px;
+  scroll-padding-top: calc(var(--hd-height) + 12px);
 }
 
 *,
@@ -15,30 +68,29 @@ html {
   box-sizing: border-box;
 }
 
-:root {
-  --hd-height: 100px;
-  --hd-capsule: #03152c;
-  --hd-capsule-border: rgba(29, 163, 214, 0.24);
-  --hd-capsule-text: #eef6fc;
-  --hd-capsule-soft: #9bb8ce;
-  --hd-active-grad: linear-gradient(135deg, #0972a8 0%, #159db3 100%);
-  --hd-ink: #0b2a4a;
-  --hd-ink-soft: #4d6475;
-  --hd-blue: #22b2e6;
-  --hd-blue-dark: #08466f;
-  --hd-line: #d5e4eb;
-  --hd-transition: 180ms ease;
-  --hd-container: min(100% - 32px, 1540px);
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
-/* Base */
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body.header-menu-open {
   overflow: hidden;
+  touch-action: none;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
 }
 
 .app-shell {
@@ -46,741 +98,527 @@ body.header-menu-open {
   min-width: 0;
 }
 
-/* Header uniforme e sólido em todas as rotas */
-html body .app-shell header.global-header,
-html body .app-shell header.global-header.header-solid,
-html body .app-shell header.global-header.header-open {
+/* ==========================================================
+   HEADER BASE (FORMATO ÚNICO EM TODAS AS PÁGINAS)
+========================================================== */
+
+html body header.global-header,
+html body header.global-header.header-solid {
   position: sticky;
   top: 0;
   left: 0;
   z-index: 9000;
   width: 100%;
-  height: var(--hd-height);
   min-height: var(--hd-height);
-  margin: 0;
-  padding: 12px env(safe-area-inset-right, 0px) 12px
-    env(safe-area-inset-left, 0px);
+  height: auto;
+  padding-block: clamp(6px, 0.8vw, 12px);
+  padding-top: calc(clamp(6px, 0.8vw, 12px) + env(safe-area-inset-top, 0px));
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  background: var(--hd-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--hd-line);
+  color: var(--hd-ink);
+  box-shadow: var(--hd-shadow);
+  isolation: isolate;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0;
-  opacity: 1 !important;
-  visibility: visible !important;
-  background: #f8fbfd !important;
-  background-image: none !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--hd-line);
-  color: var(--hd-capsule-text);
-  box-shadow: 0 6px 22px rgba(7, 47, 74, 0.06);
-  isolation: isolate;
+  transition:
+    background var(--hd-transition),
+    border-color var(--hd-transition),
+    box-shadow var(--hd-transition);
 }
 
-/* Header inner */
-html body .app-shell header.global-header .header-inner {
+.global-header a,
+.global-header a:hover,
+.global-header a:focus,
+.global-header a:active,
+.global-header a:visited {
+  text-decoration: none !important;
+}
+
+.global-header .header-inner {
   width: var(--hd-container);
-  height: 100%;
-  margin: 0 auto;
-  padding: 0;
+  min-height: calc(var(--hd-height) - clamp(12px, 1.6vw, 24px));
+  margin-inline: auto;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: clamp(8px, 1.6vw, 24px);
   min-width: 0;
-  opacity: 1 !important;
-  visibility: visible !important;
 }
 
-/* Cápsula 1: Marca e logo */
-html body .app-shell header.global-header .brand-lockup,
-html body .app-shell header.global-header.header-solid .brand-lockup,
-html body .app-shell header.global-header .brand-lockup:hover,
-html body .app-shell header.global-header .brand-lockup:focus,
-html body .app-shell header.global-header .brand-lockup:active {
+/* ==========================================================
+   MARCA / LOGO (IMAGEM RESPONSIVA, SEM BORDA, COM RESPIRO)
+========================================================== */
+
+.global-header .brand-lockup {
   flex: 0 1 auto;
   min-width: 0;
-  height: 74px;
-  max-height: 74px;
-  margin: 0;
-  padding: 6px 22px 6px 8px;
-  border-radius: 999px;
-  background: #03152c !important;
-  background-color: #03152c !important;
-  background-image: none !important;
-  border: 1px solid rgba(29, 163, 214, 0.24) !important;
-  box-shadow: 0 10px 24px rgba(3, 21, 44, 0.18);
   display: inline-flex;
-  flex-direction: row;
   align-items: center;
-  gap: 12px;
-  opacity: 1 !important;
-  visibility: visible !important;
-  color: #eef6fc !important;
-  text-decoration: none !important;
+  gap: clamp(8px, 1vw, 13px);
+  padding-block: 2px;
+  color: var(--hd-ink);
   white-space: nowrap;
   transition:
     transform var(--hd-transition),
-    box-shadow var(--hd-transition),
-    border-color var(--hd-transition);
-}
-
-html body .app-shell header.global-header .brand-lockup::before,
-html body .app-shell header.global-header .brand-lockup::after,
-html body .app-shell header.global-header .brand-lockup .brand-text::before,
-html body .app-shell header.global-header .brand-lockup .brand-text::after {
-  content: none !important;
-  display: none !important;
+    opacity var(--hd-transition);
 }
 
 .global-header .brand-lockup:hover {
   transform: translateY(-1px);
-  border-color: rgba(34, 178, 230, 0.45) !important;
-  box-shadow: 0 12px 28px rgba(3, 21, 44, 0.24);
+  opacity: 0.95;
 }
 
-html body .app-shell header.global-header .brand-lockup img {
-  width: 56px;
-  height: 56px;
-  flex: 0 0 56px;
-  margin: 0;
+.global-header .brand-lockup img {
+  width: clamp(32px, 3.6vw, 48px);
+  height: clamp(32px, 3.6vw, 48px);
+  max-width: 100%;
+  max-height: 100%;
+  flex: 0 0 auto;
   display: block;
   object-fit: cover;
   object-position: center;
-  border-radius: 999px;
-  background: #ffffff;
-  border: 2px solid rgba(34, 178, 230, 0.5);
+  border-radius: clamp(7px, 0.9vw, 12px);
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    width var(--hd-transition),
+    height var(--hd-transition),
+    border-radius var(--hd-transition);
 }
 
-html body .app-shell header.global-header .brand-lockup .brand-text {
+.global-header .brand-lockup span {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
-  gap: 3px;
-  background: transparent !important;
-  border: 0 !important;
-}
-
-html body .app-shell header.global-header .brand-lockup b {
-  display: block;
-  margin: 0;
-  color: #22b2e6 !important;
-  font-size: 19px;
-  line-height: 1.05;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-decoration: none !important;
-  background: transparent !important;
-}
-
-html body .app-shell header.global-header .brand-lockup small {
-  display: block;
-  margin: 0;
-  max-width: 240px;
   overflow: hidden;
-  color: #9bb8ce !important;
-  font-size: 10px;
+}
+
+.global-header .brand-lockup b {
+  display: block;
+  color: var(--hd-blue-dark);
+  font-size: clamp(13.5px, 1.3vw, 18.5px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.global-header .brand-lockup small {
+  display: block;
+  margin-top: 3px;
+  max-width: clamp(130px, 17vw, 245px);
+  overflow: hidden;
+  color: var(--hd-ink-soft);
+  font-size: clamp(8.5px, 0.8vw, 10px);
   line-height: 1.25;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-overflow: ellipsis;
-  text-decoration: none !important;
-  background: transparent !important;
 }
 
-/* Cápsula 2: Navegação desktop */
-html body .app-shell header.global-header .global-nav:not(.mobile-open),
-html
-  body
-  .app-shell
-  header.global-header.header-solid
-  .global-nav:not(.mobile-open) {
-  flex: 0 1 auto;
+/* ==========================================================
+   NAVEGAÇÃO DESKTOP (SEM SUBLINHADOS OU LINHAS)
+========================================================== */
+
+.global-header .global-nav {
+  flex: 1 1 auto;
   min-width: 0;
-  height: 74px;
-  max-height: 74px;
-  margin: 0;
-  padding: 8px 10px;
-  border-radius: 999px;
-  background: #03152c !important;
-  background-color: #03152c !important;
-  background-image: none !important;
-  border: 1px solid rgba(29, 163, 214, 0.24) !important;
-  box-shadow: 0 10px 24px rgba(3, 21, 44, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1 !important;
-  visibility: visible !important;
 }
 
 .global-header .nav-list {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
+  gap: clamp(2px, 0.4vw, 8px);
   min-width: 0;
 }
 
-/* Remove sublinhados decorativos nos links */
-html body .app-shell header.global-header .global-nav a,
-html body .app-shell header.global-header .global-nav a:hover,
-html body .app-shell header.global-header .global-nav a:focus,
-html body .app-shell header.global-header .global-nav a.active,
-html body .app-shell header.global-header .global-nav a span {
-  text-decoration: none !important;
-  text-decoration-line: none !important;
-  border-bottom: 0 !important;
-  box-shadow: none;
-  opacity: 1;
-}
-
-html body .app-shell header.global-header .global-nav a::before,
-html body .app-shell header.global-header .global-nav a::after {
-  content: none !important;
-  display: none !important;
-}
-
-html body .app-shell header.global-header .global-nav a {
+.global-header .global-nav a {
   position: relative;
-  min-height: 44px;
-  margin: 0;
+  min-height: clamp(36px, 2.8vw, 40px);
   display: inline-flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 15px;
-  border-radius: 999px;
-  background: transparent !important;
-  color: #eef6fc !important;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.1;
+  gap: clamp(5px, 0.55vw, 8px);
+  padding: 0 clamp(8px, 1vw, 15px);
+  border-radius: 10px;
+  color: var(--hd-ink-soft);
+  font-size: clamp(12px, 0.9vw, 13.75px);
+  font-weight: 600;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   transition:
     color var(--hd-transition),
-    background var(--hd-transition),
-    transform var(--hd-transition);
+    background-color var(--hd-transition);
 }
 
 .global-header .global-nav a svg {
+  width: clamp(15px, 1.1vw, 18px);
+  height: clamp(15px, 1.1vw, 18px);
   flex: 0 0 auto;
   color: currentColor;
-  transition: transform var(--hd-transition);
+  stroke: currentColor;
 }
 
-html body .app-shell header.global-header .global-nav a:hover {
-  color: #22b2e6 !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  transform: translateY(-1px);
+.global-header .global-nav a:hover {
+  color: var(--hd-blue);
+  background-color: var(--hd-surface-hover);
 }
 
-html body .app-shell header.global-header .global-nav a.active {
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #0972a8 0%, #159db3 100%) !important;
-  box-shadow: 0 6px 16px rgba(13, 134, 177, 0.35);
+.global-header .global-nav a.active {
+  color: var(--hd-blue-dark);
+  background-color: var(--hd-pill);
+  font-weight: 700;
 }
 
-/* Cápsula 3: Ferramentas */
-html body .app-shell header.global-header .header-tools,
-html body .app-shell header.global-header.header-solid .header-tools {
+.global-header .global-nav a::before,
+.global-header .global-nav a::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* ==========================================================
+   FERRAMENTAS (TEMA, ENTRAR, MENU HAMBÚRGUER)
+========================================================== */
+
+.global-header .header-tools {
   flex: 0 0 auto;
-  height: 74px;
-  max-height: 74px;
-  margin: 0;
-  padding: 8px 10px 8px 12px;
-  border-radius: 999px;
-  background: #03152c !important;
-  background-color: #03152c !important;
-  background-image: none !important;
-  border: 1px solid rgba(29, 163, 214, 0.24) !important;
-  box-shadow: 0 10px 24px rgba(3, 21, 44, 0.18);
   display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 8px;
-  opacity: 1 !important;
-  visibility: visible !important;
+  gap: clamp(5px, 0.65vw, 10px);
 }
 
-/* Botão do tema claro/escuro */
-html body .app-shell header.global-header .icon-button {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  margin: 0;
-  display: inline-flex !important;
+.global-header .icon-button,
+.global-header .menu-toggle {
+  width: clamp(34px, 2.9vw, 40px);
+  height: clamp(34px, 2.9vw, 40px);
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   padding: 0;
-  opacity: 1 !important;
-  visibility: visible !important;
-  border: 1.5px solid rgba(34, 178, 230, 0.5) !important;
-  border-radius: 999px;
-  background: #082648 !important;
-  color: #22b2e6 !important;
+  border: 1px solid var(--hd-line);
+  border-radius: clamp(8px, 0.85vw, 11px);
+  background: var(--hd-surface);
+  color: var(--hd-ink);
   cursor: pointer;
   transition:
-    background var(--hd-transition),
+    background-color var(--hd-transition),
     border-color var(--hd-transition),
     color var(--hd-transition),
     transform var(--hd-transition);
 }
 
-html body .app-shell header.global-header .icon-button:hover {
-  color: #ffffff !important;
-  border-color: #22b2e6 !important;
-  background: #0f3f6e !important;
+.global-header .icon-button {
+  display: inline-flex;
+}
+
+.global-header .menu-toggle {
+  display: none;
+}
+
+.global-header .icon-button svg,
+.global-header .menu-toggle svg {
+  width: clamp(15px, 1.25vw, 18px);
+  height: clamp(15px, 1.25vw, 18px);
+  color: currentColor;
+  stroke: currentColor;
+  opacity: 1;
+  flex: none;
+}
+
+.global-header .icon-button:hover,
+.global-header .menu-toggle:hover {
+  color: var(--hd-blue);
+  border-color: var(--hd-blue);
+  background-color: var(--hd-surface-hover);
   transform: translateY(-1px);
 }
 
-/* Botão Entrar */
-html body .app-shell header.global-header .header-cta {
-  min-height: 44px;
-  margin: 0;
+.global-header .header-cta,
+.global-header.header-solid .header-cta {
+  min-height: clamp(34px, 2.9vw, 40px);
   display: inline-flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 20px;
-  opacity: 1 !important;
-  visibility: visible !important;
-  border: 1.5px solid rgba(34, 178, 230, 0.55) !important;
-  border-radius: 999px;
-  background: #062140 !important;
+  gap: clamp(5px, 0.5vw, 7px);
+  padding: 0 clamp(10px, 1.25vw, 18px);
+  border: 0;
+  border-radius: clamp(8px, 0.85vw, 11px);
+  background: var(--hd-gradient);
   color: #ffffff !important;
-  text-decoration: none !important;
-  font-size: 13.5px;
-  font-weight: 800;
-  line-height: 1;
+  font-size: clamp(12px, 0.9vw, 13.75px);
+  font-weight: 700;
   white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(11, 95, 149, 0.18);
   transition:
     transform var(--hd-transition),
-    border-color var(--hd-transition),
-    background var(--hd-transition);
+    box-shadow var(--hd-transition),
+    filter var(--hd-transition);
 }
 
-html body .app-shell header.global-header .header-cta:hover {
+.global-header .header-cta svg,
+.global-header.header-solid .header-cta svg {
+  width: clamp(16px, 1.3vw, 19px);
+  height: clamp(16px, 1.3vw, 19px);
   color: #ffffff !important;
-  border-color: #22b2e6 !important;
-  background: linear-gradient(135deg, #0972a8 0%, #159db3 100%) !important;
+  stroke: #ffffff !important;
+  opacity: 1;
+  flex: none;
+}
+
+.global-header .header-cta:hover,
+.global-header.header-solid .header-cta:hover {
+  color: #ffffff !important;
   transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 20px rgba(11, 95, 149, 0.24);
 }
 
-/* Botão do menu hambúrguer */
-html body .app-shell header.global-header .menu-toggle {
-  display: none;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  margin: 0;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  opacity: 1 !important;
-  visibility: visible !important;
-  border: 1.5px solid rgba(34, 178, 230, 0.5) !important;
-  border-radius: 999px;
-  background: #082648 !important;
-  color: #eef6fc !important;
-  cursor: pointer;
-  transition:
-    background var(--hd-transition),
-    border-color var(--hd-transition),
-    color var(--hd-transition),
-    transform var(--hd-transition);
+.global-header a:focus-visible,
+.global-header button:focus-visible {
+  outline: 2px solid var(--hd-blue);
+  outline-offset: 2px;
 }
 
-html body .app-shell header.global-header .menu-toggle:hover {
-  color: #22b2e6 !important;
-  border-color: #22b2e6 !important;
-  transform: translateY(-1px);
-}
+/* ==========================================================
+   OVERLAY DO MENU MOBILE/TABLET
+========================================================== */
 
-/* Fundo escurecido atrás do menu */
 .header-overlay {
   position: fixed;
   inset: 0;
   z-index: 8990;
   width: 100%;
   height: 100%;
-  margin: 0;
   padding: 0;
   border: 0;
-  background: rgba(4, 24, 40, 0.42);
+  background: rgba(4, 18, 36, 0.42);
   backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   cursor: pointer;
 }
 
-/* Responsividade: até 1500px menu hambúrguer com ícones alinhados à esquerda */
-@media (max-width: 1500px) {
-  html body .app-shell header.global-header,
-  html body .app-shell header.global-header.header-solid,
-  html body .app-shell header.global-header.header-open {
-    --hd-height: 92px;
-  }
+/* ==========================================================
+   LAPTOP COMPACTO / TABLET / MOBILE (<= 1180px)
+========================================================== */
 
-  .global-header .header-inner {
-    width: min(100% - 32px, 1380px);
-    gap: 14px;
-  }
-
-  .global-header .brand-lockup {
-    height: 68px;
-    max-height: 68px;
-    padding: 5px 18px 5px 6px;
-  }
-
-  .global-header .brand-lockup img {
-    width: 52px;
-    height: 52px;
-    flex-basis: 52px;
-  }
-
-  .global-header .brand-lockup b {
-    font-size: 18px;
-  }
-
-  .global-header .brand-lockup small {
-    font-size: 9.5px;
-    max-width: 225px;
-  }
-
-  html body .app-shell header.global-header .global-nav:not(.mobile-open) {
-    display: none !important;
+@media (max-width: 1180px) {
+  .global-header .global-nav {
+    display: none;
   }
 
   .global-header .header-tools {
-    height: 68px;
-    max-height: 68px;
-    padding: 6px 8px;
+    margin-left: auto;
   }
 
-  html body .app-shell header.global-header .menu-toggle {
-    display: inline-flex !important;
+  .global-header .menu-toggle {
+    display: inline-flex;
   }
 
-  html body .app-shell header.global-header .global-nav.mobile-open {
+  .global-header .global-nav.mobile-open {
     position: fixed;
-    top: calc(var(--hd-height) + 8px);
-    right: 16px;
-    width: min(380px, calc(100vw - 32px));
-    max-height: calc(100vh - var(--hd-height) - 24px);
+    top: calc(var(--hd-height) + env(safe-area-inset-top, 0px) + 6px);
+    right: max(12px, env(safe-area-inset-right, 12px));
+    width: min(360px, calc(100vw - 24px));
+    max-height: calc(
+      100dvh - var(--hd-height) - env(safe-area-inset-top, 0px) - 20px
+    );
     overflow-y: auto;
-    display: block !important;
-    margin: 0;
-    padding: 12px;
-    border: 1px solid rgba(34, 178, 230, 0.32) !important;
-    border-radius: 22px;
-    background: #03152c !important;
-    background-color: #03152c !important;
-    color: #eef6fc !important;
-    box-shadow: 0 24px 64px rgba(3, 21, 44, 0.42);
-    animation: headerMenuIn 180ms ease both;
+    overscroll-behavior: contain;
+    display: block;
+    padding: 8px;
+    border: 1px solid var(--hd-line);
+    border-radius: 14px;
+    background: var(--hd-surface);
+    box-shadow: var(--hd-menu-shadow);
+    animation: headerMenuIn 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  html body .app-shell header.global-header .global-nav.mobile-open .nav-list {
+  .global-header .global-nav.mobile-open .nav-list {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    gap: 6px;
+    gap: 3px;
   }
 
-  html body .app-shell header.global-header .global-nav.mobile-open a {
+  .global-header .global-nav.mobile-open a {
     width: 100%;
-    min-height: 48px;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    text-align: left !important;
-    gap: 12px;
-    padding: 0 16px;
-    border-radius: 14px;
+    min-height: 44px;
+    justify-content: flex-start;
+    padding: 0 14px;
+    border-radius: 10px;
     font-size: 14px;
-    font-weight: 700;
   }
 
-  html body .app-shell header.global-header .global-nav.mobile-open a svg {
-    width: 19px;
-    height: 19px;
-    flex: 0 0 19px;
+  .global-header .global-nav.mobile-open a svg {
+    width: 18px;
+    height: 18px;
   }
 
-  html body .app-shell header.global-header .global-nav.mobile-open a span {
-    flex: 1 1 auto;
-    text-align: left;
+  .global-header .global-nav.mobile-open a.active {
+    background-color: var(--hd-pill);
+    color: var(--hd-blue-dark);
   }
 }
 
-/* Tablet */
-@media (max-width: 900px) {
-  html body .app-shell header.global-header,
-  html body .app-shell header.global-header.header-solid,
-  html body .app-shell header.global-header.header-open {
-    --hd-height: 84px;
-    padding-block: 10px;
-  }
+/* ==========================================================
+   TABLET & MOBILE (<= 768px)
+========================================================== */
 
-  .global-header .header-inner {
-    width: min(100% - 24px, 860px);
-    gap: 10px;
-  }
-
-  .global-header .brand-lockup {
-    height: 62px;
-    max-height: 62px;
-    padding: 5px 16px 5px 5px;
-    gap: 10px;
-  }
-
+@media (max-width: 768px) {
   .global-header .brand-lockup img {
-    width: 48px;
-    height: 48px;
-    flex-basis: 48px;
-  }
-
-  .global-header .brand-lockup b {
-    font-size: 17px;
-  }
-
-  .global-header .brand-lockup small {
-    max-width: 200px;
-    font-size: 8.5px;
-  }
-
-  .global-header .header-tools {
-    height: 62px;
-    max-height: 62px;
-    gap: 7px;
-    padding: 5px 7px;
-  }
-
-  html body .app-shell header.global-header .icon-button,
-  html body .app-shell header.global-header .menu-toggle {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
-  }
-
-  .global-header .header-cta {
-    min-height: 40px;
-    padding-inline: 15px;
+    width: clamp(32px, 5vw, 40px);
+    height: clamp(32px, 5vw, 40px);
   }
 }
 
-/* Telemóvel */
+/* ==========================================================
+   MOBILE & PHABLET (<= 640px)
+========================================================== */
+
 @media (max-width: 640px) {
-  html {
-    scroll-padding-top: 76px;
-  }
-
-  html body .app-shell header.global-header,
-  html body .app-shell header.global-header.header-solid,
-  html body .app-shell header.global-header.header-open {
-    --hd-height: 76px;
-    padding-block: 8px;
-  }
-
-  .global-header .header-inner {
-    width: calc(100% - 20px);
-    gap: 8px;
-  }
-
   .global-header .brand-lockup {
     flex: 1 1 auto;
-    min-width: 0;
-    height: 58px;
-    max-height: 58px;
-    padding: 4px 12px 4px 4px;
-    gap: 9px;
   }
 
   .global-header .brand-lockup img {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-
-  .global-header .brand-lockup b {
-    font-size: 15.5px;
-    letter-spacing: 0.03em;
-  }
-
-  .global-header .brand-lockup small {
-    max-width: 168px;
-    margin-top: 1px;
-    font-size: 8px;
-    line-height: 1.2;
-  }
-
-  .global-header .header-tools {
-    height: 58px;
-    max-height: 58px;
-    gap: 6px;
-    padding: 4px 6px;
-  }
-
-  html body .app-shell header.global-header .icon-button,
-  html body .app-shell header.global-header .menu-toggle {
-    width: 38px;
-    height: 38px;
-    flex-basis: 38px;
-  }
-
-  .global-header .header-cta {
-    min-height: 38px;
-    padding-inline: 12px;
-    gap: 6px;
-    font-size: 12.5px;
-  }
-
-  html body .app-shell header.global-header .global-nav.mobile-open {
-    top: calc(var(--hd-height) + 6px);
-    right: 10px;
-    width: calc(100vw - 20px);
-    max-height: calc(100vh - var(--hd-height) - 16px);
-    border-radius: 18px;
-    padding: 10px;
-  }
-}
-
-/* Telemóvel pequeno */
-@media (max-width: 480px) {
-  .global-header .brand-lockup {
-    padding-right: 10px;
-    gap: 8px;
+    width: clamp(30px, 7.5vw, 36px);
+    height: clamp(30px, 7.5vw, 36px);
   }
 
   .global-header .brand-lockup small {
     display: none;
   }
 
-  .global-header .brand-lockup b {
-    font-size: 15px;
+  .global-header .global-nav.mobile-open {
+    left: max(12px, env(safe-area-inset-left, 12px));
+    right: max(12px, env(safe-area-inset-right, 12px));
+    width: auto;
+    border-radius: 14px;
   }
+}
 
+/* ==========================================================
+   MOBILE PEQUENO (<= 430px)
+========================================================== */
+
+@media (max-width: 430px) {
   .global-header .header-cta {
-    width: 38px;
-    min-width: 38px;
+    width: 34px;
     padding: 0;
   }
 
   .global-header .header-cta span {
     display: none;
   }
-
-  .global-header .header-cta svg {
-    width: 17px;
-    height: 17px;
-  }
 }
 
-/* Telemóvel muito pequeno */
-@media (max-width: 360px) {
-  html body .app-shell header.global-header,
-  html body .app-shell header.global-header.header-solid,
-  html body .app-shell header.global-header.header-open {
-    --hd-height: 70px;
+/* ==========================================================
+   ULTRAESTREITO / FOLD FECHADO / RELÓGIO (<= 330px)
+========================================================== */
+
+@media (max-width: 330px) {
+  .global-header .header-inner {
+    width: calc(100% - 12px);
+    gap: 5px;
   }
 
-  .global-header .header-inner {
-    width: calc(100% - 16px);
+  .global-header .brand-lockup {
     gap: 6px;
   }
 
-  .global-header .brand-lockup {
-    height: 52px;
-    max-height: 52px;
-    padding: 4px 10px 4px 4px;
-  }
-
   .global-header .brand-lockup img {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
   }
 
   .global-header .brand-lockup b {
-    font-size: 14px;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
   }
 
-  .global-header .header-tools {
-    height: 52px;
-    max-height: 52px;
-    gap: 4px;
-    padding: 4px 5px;
-  }
-
-  html body .app-shell header.global-header .icon-button,
-  html body .app-shell header.global-header .header-cta,
-  html body .app-shell header.global-header .menu-toggle {
-    width: 36px;
-    min-width: 36px;
-    height: 36px;
-    flex-basis: 36px;
+  .global-header .icon-button,
+  .global-header .menu-toggle,
+  .global-header .header-cta {
+    width: 30px;
+    height: 30px;
+    min-height: 30px;
+    border-radius: 8px;
   }
 }
 
-/* Paisagem com pouca altura */
-@media (max-height: 520px) and (orientation: landscape) {
-  html body .app-shell header.global-header,
-  html body .app-shell header.global-header.header-solid,
-  html body .app-shell header.global-header.header-open {
-    --hd-height: 64px;
-    padding-block: 6px;
-  }
+/* ==========================================================
+   LANDSCAPE COM POUCA ALTURA (TELEMÓVEL DEITADO)
+========================================================== */
 
-  .global-header .brand-lockup {
-    height: 50px;
-    max-height: 50px;
+@media (max-height: 520px) and (orientation: landscape) {
+  :root {
+    --hd-height: 54px;
   }
 
   .global-header .brand-lockup img {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
+    width: 30px;
+    height: 30px;
   }
 
   .global-header .brand-lockup small {
     display: none;
   }
 
-  .global-header .brand-lockup b {
-    font-size: 14.5px;
+  .global-header .global-nav.mobile-open .nav-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
   }
 
-  .global-header .header-tools {
-    height: 50px;
-    max-height: 50px;
-  }
-
-  html body .app-shell header.global-header .global-nav.mobile-open {
-    max-height: calc(100vh - 76px);
+  .global-header .global-nav.mobile-open a {
+    min-height: 38px;
+    font-size: 13px;
   }
 }
 
-/* Animação do menu */
+/* ==========================================================
+   ULTRAWIDE / MONITORES GRANDES (1920px+)
+========================================================== */
+
+@media (min-width: 1920px) {
+  :root {
+    --hd-container: min(calc(100% - 96px), 1720px);
+  }
+
+  .global-header .global-nav a {
+    padding-inline: 16px;
+  }
+}
+
+/* ==========================================================
+   ANIMAÇÃO & ACESSIBILIDADE
+========================================================== */
+
 @keyframes headerMenuIn {
   from {
     opacity: 0;
-    transform: translateY(-7px) scale(0.985);
+    transform: translateY(-6px) scale(0.985);
   }
-
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
 
-/* Redução de movimento */
 @media (prefers-reduced-motion: reduce) {
   .global-header *,
   .global-header *::before,
@@ -791,20 +629,28 @@ html body .app-shell header.global-header .menu-toggle:hover {
   }
 }
 
-/* Rodapé: base responsiva */
+/* ==========================================================
+   FOOTER — RESPONSIVIDADE PURA
+========================================================== */
+
 .global-footer {
   width: 100%;
   min-width: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.global-footer a,
+.global-footer a:hover,
+.global-footer a:focus {
+  text-decoration: none;
 }
 
 .footer-main {
   display: grid;
   grid-template-columns:
-    minmax(0, 1.25fr)
-    minmax(0, 0.8fr)
-    minmax(0, 1fr)
-    minmax(0, 1fr);
-  gap: 42px;
+    minmax(0, 1.35fr)
+    repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3.5vw, 48px);
   min-width: 0;
 }
 
@@ -826,160 +672,49 @@ html body .app-shell header.global-header .menu-toggle:hover {
 }
 
 .footer-logo img {
-  width: 42px;
-  height: 42px;
+  width: clamp(32px, 3vw, 42px);
+  height: clamp(32px, 3vw, 42px);
+  max-width: 100%;
   object-fit: cover;
   border-radius: 10px;
+  border: 0 !important;
+  box-shadow: none;
 }
 
 .footer-logo b {
-  font-size: 17px;
+  font-size: clamp(15px, 1.25vw, 18px);
 }
 
 .icons-footer {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 8px;
 }
 
 .icons-footer a {
-  width: 40px;
-  height: 40px;
+  width: clamp(34px, 3vw, 38px);
+  height: clamp(34px, 3vw, 38px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
 }
 
-/* Rodapé: tablet */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .footer-main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 34px 28px;
+    gap: 28px 24px;
+  }
+
+  .footer-main > div:first-child {
+    grid-column: 1 / -1;
   }
 }
 
-/* Rodapé: telemóvel */
-@media (max-width: 600px) {
+@media (max-width: 560px) {
   .footer-main {
     grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .icons-footer {
-    gap: 8px;
-  }
-}
-
-/* Segurança contra scroll horizontal */
-html,
-body,
-#root {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-}
-
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-}
-
-/* Modo escuro do cabeçalho em todas as rotas */
-html.dark body .app-shell header.global-header,
-html.dark body .app-shell header.global-header.header-solid,
-[data-theme="dark"] body .app-shell header.global-header,
-[data-theme="dark"] body .app-shell header.global-header.header-solid {
-  background: #07151f !important;
-  border-bottom-color: #1f3d51;
-  box-shadow: 0 7px 26px rgba(0, 0, 0, 0.35);
-}
-
-html.dark body .app-shell header.global-header .brand-lockup,
-html.dark body .app-shell header.global-header .global-nav:not(.mobile-open),
-html.dark body .app-shell header.global-header .header-tools,
-[data-theme="dark"] body .app-shell header.global-header .brand-lockup,
-[data-theme="dark"]
-  body
-  .app-shell
-  header.global-header
-  .global-nav:not(.mobile-open),
-[data-theme="dark"] body .app-shell header.global-header .header-tools {
-  background: #021124 !important;
-  background-color: #021124 !important;
-  border-color: rgba(76, 179, 239, 0.28) !important;
-}
-
-/* Ajuste cirúrgico: impede o nome DYLANDE de sair da cápsula na responsividade */
-html body .app-shell header.global-header .header-inner {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 8px !important;
-}
-
-html body .app-shell header.global-header .brand-lockup {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-}
-
-html body .app-shell header.global-header .brand-lockup .brand-text {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  overflow: hidden !important;
-}
-
-html body .app-shell header.global-header .brand-lockup b {
-  min-width: 0 !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-html body .app-shell header.global-header .brand-lockup small {
-  min-width: 0 !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-@media (max-width: 1500px) {
-  html body .app-shell header.global-header .header-tools {
-    flex: 0 0 auto !important;
-  }
-
-  html body .app-shell header.global-header .global-nav.mobile-open a {
-    justify-content: flex-start !important;
-    text-align: left !important;
-    gap: 12px !important;
-  }
-}
-
-@media (max-width: 640px) {
-  html body .app-shell header.global-header .brand-lockup {
-    padding-right: 10px !important;
-    gap: 8px !important;
-  }
-
-  html body .app-shell header.global-header .brand-lockup b {
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  html body .app-shell header.global-header .brand-lockup small {
-    display: none !important;
-  }
-
-  html body .app-shell header.global-header .brand-lockup b {
-    font-size: 13px !important;
-    letter-spacing: 0.02em !important;
+    gap: 22px;
   }
 }

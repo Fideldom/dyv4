@@ -1,6 +1,13 @@
 /* DYLANDE — Navy Precision / Corporate Rebuild
-   Layout partilhado: editorial B2B, confiança, hierarquia e conversão sem ruído.
+   Layout global partilhado:
+   - Header presente em todas as páginas
+   - Navegação responsiva
+   - Tema claro/escuro
+   - Footer global
+   - Transições de página
+   - WhatsApp
 */
+
 import { Link, useLocation } from "wouter";
 import {
   Award,
@@ -17,15 +24,19 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
+
 import { useTheme } from "@/contexts/ThemeContext";
 import { siteConfig } from "@/lib/siteConfig";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+
 import {
   MotionHeroTitle,
   type MotionTitleVariant,
 } from "@/components/motion/MotionHeroTitle";
+
 import { Reveal } from "@/components/motion/Reveal";
 import { PageTransition } from "@/components/motion/PageTransition";
+
 import "./site-header.css";
 
 const logo = "/media/IMG-20260831-WA0000.jpg";
@@ -49,26 +60,41 @@ const navIcons = {
 } as const;
 
 function resolvePathname(raw: unknown): string {
-  if (typeof raw === "string") return raw;
+  if (typeof raw === "string") {
+    return raw;
+  }
+
   if (raw && typeof raw === "object" && "pathname" in raw) {
     const pathname = (raw as { pathname?: unknown }).pathname;
-    if (typeof pathname === "string") return pathname;
+
+    if (typeof pathname === "string") {
+      return pathname;
+    }
   }
+
   return "/";
 }
 
 function isNavActive(href: string, location: string): boolean {
-  if (href === "/") return location === "/";
+  if (href === "/") {
+    return location === "/";
+  }
+
   return location === href || location.startsWith(`${href}/`);
 }
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [rawLocation] = useLocation();
+
   const location = resolvePathname(rawLocation);
+
   const [open, setOpen] = useState(false);
+
   const { theme, toggleTheme } = useTheme();
 
-  const close = () => setOpen(false);
+  const closeMenu = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setOpen(false);
@@ -82,38 +108,55 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
     if (!open) {
       document.body.classList.remove("header-menu-open");
+
       return;
     }
 
     document.body.classList.add("header-menu-open");
-    return () => document.body.classList.remove("header-menu-open");
+
+    return () => {
+      document.body.classList.remove("header-menu-open");
+    };
   }, [open]);
 
   return (
     <div className="app-shell">
+      {/* =====================================================
+          HEADER GLOBAL
+          Este header pertence ao SiteLayout e deve envolver
+          todas as rotas/páginas da aplicação.
+      ====================================================== */}
+
       <header
-        className={`global-header ${location !== "/" ? "header-solid" : ""} ${open ? "header-open" : ""}`}
+        className={`global-header header-solid ${open ? "header-open" : ""}`}
       >
         <div className="header-inner">
+          {/* LOGO / MARCA */}
           <Link
             href="/"
             className="brand-lockup"
-            onClick={close}
+            onClick={closeMenu}
             aria-label="DYLANDE — Página inicial"
           >
             <img src={logo} alt="DYLANDE" />
-            <span className="brand-text">
+
+            <span>
               <b>DYLANDE</b>
+
               <small>Prestação de Serviços e Comércio Geral</small>
             </span>
           </Link>
 
+          {/* NAVEGAÇÃO */}
           <nav
             className={`global-nav ${open ? "mobile-open" : ""}`}
             aria-label="Navegação principal"
@@ -121,6 +164,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <div className="nav-list">
               {nav.map(([label, href, icon]) => {
                 const Icon = navIcons[icon];
+
                 const active = isNavActive(href, location);
 
                 return (
@@ -129,9 +173,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                     href={href}
                     className={active ? "active" : ""}
                     aria-current={active ? "page" : undefined}
-                    onClick={close}
+                    onClick={closeMenu}
                   >
-                    <Icon size={18} strokeWidth={2} />
+                    <Icon size={20} strokeWidth={2} />
+
                     <span>{label}</span>
                   </Link>
                 );
@@ -139,7 +184,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </div>
           </nav>
 
+          {/* FERRAMENTAS */}
           <div className="header-tools">
+            {/* TEMA */}
             <button
               type="button"
               className="icon-button"
@@ -152,17 +199,20 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
 
-            <Link href="/login" className="header-cta" onClick={close}>
-              <LogIn size={18} />
+            {/* LOGIN */}
+            <Link href="/login" className="header-cta" onClick={closeMenu}>
+              <LogIn size={19} />
+
               <span>Entrar</span>
             </Link>
 
+            {/* MENU MOBILE / TABLET */}
             <button
               type="button"
               className="menu-toggle"
               aria-label={open ? "Fechar menu" : "Abrir menu"}
               aria-expanded={open}
-              onClick={() => setOpen((prev) => !prev)}
+              onClick={() => setOpen((previous) => !previous)}
             >
               {open ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -170,33 +220,47 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
+      {/* OVERLAY DO MENU */}
       {open && (
         <button
           type="button"
           className="header-overlay"
           aria-label="Fechar menu"
-          onClick={close}
+          onClick={closeMenu}
         />
       )}
+
+      {/* =====================================================
+          CONTEÚDO
+      ====================================================== */}
 
       <main className="main-content">
         <PageTransition location={location}>{children}</PageTransition>
       </main>
 
+      {/* =====================================================
+          FOOTER GLOBAL
+      ====================================================== */}
+
       <footer className="global-footer">
         <div className="container footer-main">
+          {/* COLUNA 1 */}
           <div>
             <Link href="/" className="footer-logo">
               <img src={logo} alt="" />
+
               <b>DYLANDE</b>
             </Link>
+
             <p>
               <span>{siteConfig.contact.location}</span>
             </p>
           </div>
 
+          {/* COLUNA 2 */}
           <div>
             <span className="footer-label">Explorar</span>
+
             {nav.map(([label, href]) => (
               <Link key={href} href={href}>
                 {label}
@@ -204,11 +268,14 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             ))}
           </div>
 
+          {/* COLUNA 3 */}
           <div>
             <span className="footer-label">Contacto</span>
+
             <a href={`mailto:${siteConfig.contact.email}`}>
               {siteConfig.contact.email}
             </a>
+
             <a
               href={`https://wa.me/${siteConfig.contact.whatsapp}`}
               target="_blank"
@@ -216,27 +283,33 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             >
               WhatsApp comercial
             </a>
+
             <span>{siteConfig.contact.phone1}</span>
+
             <span>{siteConfig.contact.phone2}</span>
           </div>
 
+          {/* COLUNA 4 */}
           <div>
             <span className="footer-label">Redes Sociais</span>
+
             <p>Mantenha-te ligado a DY!</p>
+
             <div className="icons-footer">
+              {/* X */}
               <a href="#" className="twitter" aria-label="X (Twitter)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   fill="currentColor"
-                  className="bi bi-twitter-x"
                   viewBox="0 0 16 16"
                 >
                   <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
                 </svg>
               </a>
 
+              {/* FACEBOOK */}
               <a
                 href="https://www.facebook.com/profile.php?id=61552557230633"
                 className="facebook"
@@ -249,13 +322,13 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                   width="24"
                   height="24"
                   fill="currentColor"
-                  className="bi bi-facebook"
                   viewBox="0 0 16 16"
                 >
                   <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
                 </svg>
               </a>
 
+              {/* INSTAGRAM */}
               <a
                 href="https://www.instagram.com/dylandesoftangola/"
                 className="instagram"
@@ -268,33 +341,32 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                   width="24"
                   height="24"
                   fill="currentColor"
-                  className="bi bi-instagram"
                   viewBox="0 0 16 16"
                 >
                   <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
                 </svg>
               </a>
 
+              {/* YOUTUBE */}
               <a href="https://" className="youtube" aria-label="YouTube">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   fill="currentColor"
-                  className="bi bi-youtube"
                   viewBox="0 0 16 16"
                 >
                   <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z" />
                 </svg>
               </a>
 
+              {/* LINKEDIN */}
               <a href="#" className="linkedin" aria-label="LinkedIn">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   fill="currentColor"
-                  className="bi bi-linkedin"
                   viewBox="0 0 16 16"
                 >
                   <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
@@ -311,14 +383,18 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 }
 
 export const Layout = SiteLayout;
+
 export default SiteLayout;
+
+/* ==========================================================
+   PAGE INTRO
+========================================================== */
 
 export function PageIntro({
   title,
   text,
   variant = "mask",
 }: {
-  kicker?: string;
   title: string;
   text: string;
   variant?: MotionTitleVariant;
@@ -326,12 +402,17 @@ export function PageIntro({
   return (
     <div className="page-intro">
       <MotionHeroTitle as="h1" title={title} variant={variant} />
+
       <Reveal delay={0.15} trigger="mount">
         <p>{text}</p>
       </Reveal>
     </div>
   );
 }
+
+/* ==========================================================
+   MEDIA CARD
+========================================================== */
 
 export function MediaCard({
   image,
@@ -349,12 +430,17 @@ export function MediaCard({
   return (
     <article className="media-card">
       <img src={image} alt="" />
+
       <div className="media-card-body">
         <span className="eyebrow">{label}</span>
+
         <h3>{title}</h3>
+
         <p>{text}</p>
+
         <Link href={href} className="text-link">
-          Explorar <ArrowUpRight size={15} />
+          Explorar
+          <ArrowUpRight size={15} />
         </Link>
       </div>
     </article>

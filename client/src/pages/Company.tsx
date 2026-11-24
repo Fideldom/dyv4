@@ -91,7 +91,11 @@ const team = [
   ],
   ["Esmael Andrade", "Desenvolvedor Backend", "Suporte Técnico"],
   ["Edson António", "Desenvolvedor Web", ""],
-  ["Fidel Maluto", "Desenvolvedor Web/APP", ""],
+  [
+    "Fidel Maluto", 
+    "Full-Stack Developer | Web and Software Development", 
+    "Desenvolvedor Full-Stack focado na criação de aplicações web modernas, escaláveis e de alto desempenho."
+  ],
 ];
 
 function initials(name: string) {
